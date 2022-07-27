@@ -29,3 +29,8 @@ export const selectedMode={
     edit: 2,
     delete: 3,
 }
+
+
+export const Test={
+    add :1,
+}
