@@ -1,26 +1,32 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <the-nav :isCloseNav="isCloseNavigation"  @is-opennav="toggleNav"></the-nav>
+  <the-header :isCloseNav="isCloseNavigation" @is-closenav="toggleNav"></the-header>
+  <the-content :isCloseNav="isCloseNavigation"></the-content>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 
+import TheNav from "./components/layout/TheNav.vue";
+import TheHeader from "./components/layout/TheHeader.vue";
+import TheContent from "./components/layout/TheContent.vue";
 export default {
   name: 'App',
   components: {
-    HelloWorld
-  }
+    TheNav,TheHeader,TheContent
+  },
+  data() {
+    return {
+      isCloseNavigation : false,
+    }
+  },
+  methods: {
+    toggleNav(val){
+      this.isCloseNavigation = !val;
+    }
+  },
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  @import url(./styles/main.css);
 </style>

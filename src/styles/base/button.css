@@ -1,0 +1,32 @@
+
+.button{
+    font-weight: 600;
+    height: 34px;
+    padding: 0 24px;
+    border: none;
+    background-color: #28A01A;
+    color: #ffffff;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.button:hover{
+    background-color: #35bf22;
+    color: #fff;
+}
+
+.button--white{
+    background-color: #fff;
+    border: 1px solid #8d9096;
+    color: #111;
+}
+
+.button--white:hover{
+    color: #111;
+    background-color: #d2d3d6;
+}
+
+.button--disable{
+    opacity: 0.6;
+    cursor: auto!important;
+}

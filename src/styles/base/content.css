@@ -1,0 +1,90 @@
+.content{
+    padding: 60px 16px 0 16px;
+    margin-left: var(--width-nav);
+
+}
+
+.content__label{
+    padding: 16px 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.content__main{
+    background-color: #ffffff;
+}
+
+.content__feature{
+    padding: 16px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.content__feature>.input{
+    width: 250px;
+    margin-right: 10px;
+}
+
+.content__table{
+    padding: 16px 16px 0 16px;
+}
+
+.content__footer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 32px;
+}
+
+.footer__right{
+    display: flex;
+    align-items: center;
+}
+
+.footer__right>.dropdown>input{
+    font-family: AMIS Fonts;
+}
+
+.footer__right>.dropdown{
+    border: 1px solid #cccccc;
+    width: 200px;
+    margin-right: 10px;
+    padding-left: 8px;
+    box-sizing: border-box;
+}
+
+
+.page__number{
+    display: flex;
+    align-items: center;
+    font-family: AMIS Fonts;
+}
+
+.page__number button{
+    border: none;
+    background-color: #ffffff;
+    min-width: 24px;
+    height: 24px;
+    font-family: AMIS Fonts;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.page--selected{
+    border: 1px solid #babec5!important;
+    font-weight: 700;
+}
+
+.footer__left span{
+    font-family: AMIS Fonts Bold;
+}
+
+.content__table .table{
+    height: 680px;
+}
+
+.content__title{
+    font-family: AMIS Fonts Bold;
+    font-size: 24px;
+}

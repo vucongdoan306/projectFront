@@ -1,0 +1,230 @@
+.logo{
+    height: 32px;
+    cursor: pointer;
+}
+
+.icon{
+    background-image: url(../../assets/img/Sprites.64af8f61.svg)!important;
+}
+
+.box__icon{
+    height: 24px;
+    width: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+	cursor: pointer;
+}
+
+.box__icon#btnReload:hover{
+	filter: brightness(0.5);
+}
+
+.icon__toggle{
+    background: no-repeat -1157px -32px;
+    width: 16px;
+    height: 16px;
+    /* filter: brightness(5); */
+    cursor: pointer;
+}
+
+.icon__overview{
+    background: no-repeat -33px -1630px;
+	width: 18px;
+	height: 20px;
+}
+
+.icon__cash{
+    background: no-repeat -78px -1631px;
+	width: 14px;
+	height: 18px;
+}
+
+.icon__deposits{
+    background:  no-repeat -121px -1633px;
+	width: 16px;
+	height: 16px;
+}
+
+.icon__purchase{
+    background:  no-repeat -165px -1632px;
+	width: 16px;
+	height: 18px;
+}
+
+.icon__sell{
+    background:  no-repeat -206px -1631px;
+	width: 20px;
+	height: 18px;
+}
+
+.icon__invoice{
+    background:  no-repeat -254px -1632px;
+	width: 14px;
+	height: 17px;
+}
+
+.icon__bunker{
+    background:  no-repeat -294px -1632px;
+	width: 18px;
+	height: 17px;
+}
+
+.icon__tool{
+    background:  no-repeat -339px -1633px;
+	width: 18px;
+	height: 17px;
+}
+
+.icon__asset{
+    background:  no-repeat -382px -1632px;
+	width: 17px;
+	height: 18px;
+}
+
+.icon__tax{
+    background:  no-repeat -427px -1634px;
+	width: 16px;
+	height: 16px;
+}
+
+.icon__price{
+    background:  no-repeat -471px -1633px;
+	width: 17px;
+	height: 17px;
+}
+
+.icon__synthetic{
+    background:  no-repeat -514px -1632px;
+	width: 16px;
+	height: 18px;
+}
+
+.icon__budget{
+    background:  no-repeat -382px -1664px;
+	width: 16px;
+	height: 16px;
+}
+
+.icon__report{
+    background:  no-repeat -552px -1636px;
+	width: 14px;
+	height: 13px;
+}
+
+.icon__analysis{
+    background: no-repeat -207px -1667px;
+	width: 17px;
+	height: 14px;
+}
+
+.icon__toggle--header{
+    background: no-repeat -847px -35px;
+	width: 16px;
+	height: 14px;
+}
+
+.icon__arrow--down8{
+    background: no-repeat -1129px -365px;
+	width: 14px;
+	height: 8px;
+}
+
+.icon__avatar{
+    background: no-repeat -352px -894px;
+	width: 32px;
+	height: 32px;
+	border-radius: 50%;
+}
+
+.icon__arrow--down5{
+    background: no-repeat -1800px -478px;
+	width: 8px;
+	height: 5px;
+}
+
+.icon__down5{
+	background: no-repeat -900px -365px;
+	width: 8px;
+	height: 5px;
+}
+
+.icon__down5-black{
+	background: no-repeat -564px -365px;
+	width: 8px;
+	height: 5px;
+}
+
+.icon__ring{
+	background: no-repeat -788px -30px;
+	width: 22px;
+	height: 25px;
+}
+
+.icon__search{
+	background: no-repeat -800px -360px;
+	width: 16px;
+	height: 16px;
+}
+
+.icon__refresh{
+	background: no-repeat -425px -201px;
+	width: 21px;
+	height: 23px;
+}
+
+.icon__down8{
+	background: no-repeat -371px -364px;
+	width: 10px;
+	height: 8px;
+}
+
+.icon__question22{
+	background: no-repeat -89px -145px;
+	width: 22px;
+	height: 22px;
+}
+
+.icon__close18{
+	background: no-repeat -147px -147px;
+	width: 18px;
+	height: 18px;
+}
+
+.icon__search--input{
+	background: no-repeat -992px -360px;
+	width: 16px;
+	height: 16px;
+	cursor: pointer;
+}
+
+.icon__warning--danger{
+	background: no-repeat -752px -462px;
+	width: 36px;
+	height: 36px;
+}
+
+
+.icon__warning--info{
+	background:  no-repeat -672px -462px;
+	width: 36px;
+	height: 36px;
+}
+
+.icon__warning--regular{
+	background:  no-repeat -598px -463px;
+	width: 36px;
+	height: 37px;
+}
+
+.icon__warning--question{
+	background:  no-repeat -832px -462px;
+	width: 36px;
+	height: 36px;
+}
+
+.icon__celendar{
+	background: -128px -307px;
+	min-width: 24px;
+    min-height: 24px;
+}
