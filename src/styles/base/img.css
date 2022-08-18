@@ -167,6 +167,10 @@
 	height: 16px;
 }
 
+.icon__search:hover{
+	filter: brightness(0.5);
+}
+
 .icon__refresh{
 	background: no-repeat -425px -201px;
 	width: 21px;
@@ -199,9 +203,9 @@
 }
 
 .icon__warning--danger{
-	background: no-repeat -752px -462px;
-	width: 36px;
-	height: 36px;
+	background: no-repeat -32px -962px;
+	width: 32px;
+	height: 32px;
 }
 
 
@@ -227,4 +231,15 @@
 	background: -128px -307px;
 	min-width: 24px;
     min-height: 24px;
+}
+
+.icon__excel{
+	background: no-repeat -705px -202px;
+	width: 23px;
+	height: 20px;
+}
+
+
+.icon.icon__refresh:hover {
+    filter: brightness(0.5);
 }

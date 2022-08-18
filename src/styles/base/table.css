@@ -30,20 +30,23 @@ th{
     font-size: 12px;
     font-weight: bold;
     height: 34px;
+    border-right: 1px #cccccc solid;
 }
 
 td{
     height: 44px;
+    border-right: 1px #cccccc dotted;
 }
 
 
 th, td{
     background-color: inherit;
     border-bottom: 1px solid #cccccc;
-    border-right: 1px #cccccc dotted;
-    padding-right: 16px;
+
+    padding-right: 10px;
     padding-left: 10px;
     box-sizing: border-box;
+    text-overflow: ellipsis;
 }
 
 table{
@@ -51,7 +54,7 @@ table{
     border-spacing: 0;
 }
 
-table td:first-child{
+.table table td:first-child{
     position: sticky;
     left: 0;
     z-index: 2;
@@ -63,38 +66,29 @@ table td:first-child{
     right: 0;
     z-index: 2;
     border-left: 1px dotted #cccccc!important;
+    border-right: none;
 }
 
-table th:first-child{
+.table table th:first-child{
     position: sticky;
     left: 0;
     z-index: 2;
     border-right: 1px dotted #cccccc!important;
 }
 
-table th:last-child{
+.table table th:last-child{
     width: 0px;
     background-color: transparent;
     border: none;
     padding: 0;
 }
 
-table td:last-child{
+.table table td:last-child{
     width: 0px;
     background-color: transparent;
     border: none;
     padding: 0;
 }
-
-
-
-
-
-/* .table__checkbox{
-    position: sticky;
-    left: 0;
-    z-index: 2;
-} */
 
 th{
     text-transform: uppercase;
@@ -121,26 +115,37 @@ tr:hover{
 
 .column--25{
     min-width: 25px;
+
 }
 
 .column--50{
     min-width: 50px;
+    max-width: 50px;
 }
 
 .column--100{
     min-width: 100px;
+    max-width: 100px;
+}
+
+.column--125{
+    min-width: 125px;
+    max-width: 125px;
 }
 
 .column--150{
     min-width: 150px;
+    max-width: 150px;
 }
 
 .column--200{
     min-width: 200px;
+    max-width: 200px;    
 }
 
 .column--250{
     min-width: 250px;
+    max-width: 250px;
 }
 
 .column__sticky--right{
@@ -154,4 +159,10 @@ tr:hover{
     top: 60%;
     left: -125px;
     z-index: 9;
+}
+
+.nowrap{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }

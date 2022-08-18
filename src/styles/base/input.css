@@ -62,5 +62,8 @@
     border: 1px solid #2ca01c;
 }
 
+.input .text--capitalize{
+    text-transform: capitalize;
+}
 
 

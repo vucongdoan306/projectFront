@@ -104,6 +104,131 @@
   .ui-datepicker-unselectable .ui-state-default {
     color: #eee;
     border: 1px solid transparent;
-  }
+}
+
+.dx-datebox-calendar .dx-dropdowneditor-icon::before {
+    background-image: url('../../assets/img/Sprites.64af8f61.svg') !important;
+    content: ""!important;
+    background: no-repeat -128px -312px;
+	width: 16px;
+	height: 16px;
+    position: absolute;
+    display: block;
+    width: 18px;
+    top: 50%;
+    margin-top: -9px;
+    left: 50%;
+    margin-left: -9px;
+} 
+
   
+
+
+.dx-dropdowneditor-button .dx-button-content {
+  text-align: center;
+  white-space: nowrap;
+  padding-left: 5px;
+
+}
+.dx-datebox-calendar .dx-dropdowneditor-icon::before {
+  content: "" !important;
+ 
+}
+.dx-dropdowneditor-button.dx-state-active .dx-dropdowneditor-icon, .dx-dropdowneditor.dx-dropdowneditor-active .dx-dropdowneditor-icon {
+  background-color: transparent !important; 
+  border-color: transparent;
+  /* color: #333; */
+  opacity: 1;
+}
+
+.dx-invalid.dx-texteditor.dx-editor-filled.dx-show-invalid-badge .dx-texteditor-input-container::after, .dx-invalid.dx-texteditor.dx-editor-outlined.dx-show-invalid-badge .dx-texteditor-input-container::after, .dx-invalid.dx-texteditor.dx-editor-underlined.dx-show-invalid-badge .dx-texteditor-input-container::after {
+  pointer-events: none;
+  font-weight: 700;
+  position: absolute;
+  top: 50%;
+  margin-top: -9px;
+  width: 18px;
+  height: 18px;
+  text-align: center;
+  line-height: 18px;
+  font-size: 13px;
+  background-color: transparent !important;
+  color: #fff;
+  border-radius: 50%;
+}
+.dx-invalid-message.dx-overlay {
+  display: none !important; 
+}
+.dx-invalid.dx-texteditor {
+border: 1px solid #ddd !important;
+}
+.dx-texteditor.dx-state-active.dx-editor-filled, 
+.dx-texteditor.dx-state-active.dx-editor-outlined,
+.dx-texteditor.dx-state-active.dx-editor-underlined, 
+.dx-texteditor.dx-state-focused.dx-editor-filled,
+.dx-texteditor.dx-state-focused.dx-editor-outlined, 
+.dx-texteditor.dx-state-focused.dx-editor-underlined{
+  border-color: #35bf22 !important;
+}
+.dx-texteditor.dx-state-hover{
+  border-color: #ddd !important;
+}
+.dx-calendar-navigator-previous-month.dx-button .dx-icon, .dx-calendar-navigator-previous-view.dx-button .dx-icon {
+  color: #35bf22;
+}
+.dx-calendar-navigator .dx-calendar-caption-button.dx-button .dx-button-content {
+  padding: 2px 15px 4px;
+  color: #35bf22;
+}
+.dx-calendar-navigator-next-month.dx-button .dx-icon, .dx-calendar-navigator-next-view.dx-button .dx-icon {
+  color: #35bf22;
+}
+.dx-calendar-cell.dx-calendar-selected-date.dx-calendar-contoured-date, .dx-calendar-cell.dx-calendar-selected-date.dx-calendar-today.dx-calendar-contoured-date {
+  -webkit-box-shadow: inset 0 0 0 1px #bebebe, inset 0 0 0 1000px #35bf22;
+  box-shadow: inset 0 0 0 1px #bebebe, inset 0 0 0 1000px #35bf22;
+}
+.dx-calendar-cell.dx-calendar-selected-date, .dx-calendar-cell.dx-calendar-selected-date.dx-calendar-today {
+  color: #fff;
+  -webkit-box-shadow: inset 0 0 0 1000px #35bf22;
+  box-shadow: inset 0 0 0 1000px #35bf22;
+  font-weight: 400;
+}
+.dx-texteditor-buttons-container:hover {
+  background-color: #ddd ;
+  padding-left: 4px;
+}
+
+.dx-dropdowneditor-button.dx-state-active .dx-dropdowneditor-icon, .dx-dropdowneditor.dx-dropdowneditor-active .dx-dropdowneditor-icon {
+  background-color: transparent;
+  border-color: transparent;
+  color: #333;
+  opacity: 1;
+}
+.dx-texteditor.dx-editor-outlined {
+  background: #fff;
+  border: 1px solid #babec5 !important;
+  border-radius: 2px !important;
+  height: 32px;
+  min-height: 32px;
+}
+.dx-widget input, .dx-widget textarea {
+  line-height: 34px !important;
+  font-family: AMIS Fonts !important;
+}
+.dx-dropdowneditor.dx-state-active .dx-dropdowneditor-icon, 
+.dx-dropdowneditor.dx-state-hover:not(.dx-custom-button-hovered) .dx-dropdowneditor-icon{
+  background-color: transparent !important;
+}
+.dx-placeholder::before {
+  vertical-align: middle;
+  max-width: 100%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  content: "DD/MM/YYYY";
+  pointer-events: none;
+  white-space: nowrap;
+  font-style: italic;
+  font-size: 13px;
+  font-family: AMIS Fonts !important;
+}
    

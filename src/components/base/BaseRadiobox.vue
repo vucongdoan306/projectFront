@@ -13,7 +13,6 @@
   </div>
 </template>
 <style scoped>
-/* @import url(../../styles/components/radio.css); */
 </style>
 <script>
 export default {

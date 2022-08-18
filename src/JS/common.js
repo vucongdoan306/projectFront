@@ -5,6 +5,11 @@ var gender = {
 }
 
 export class Common {
+
+    /**
+     * Hàm thực hiện format Date
+     * Author: Công Đoàn (22/07/2022)
+     */
     static formatDate(date){
         if(date != null){
             date = new Date(date); //mm//dd/yyyy
@@ -17,8 +22,28 @@ export class Common {
         }
     }
 
+    /**
+     * Hàm kiểm tra ngày nhập lớn hơn ngày hiện tại
+     * Author: Công Đoàn (02/08/2022)
+     */
 
+    static validateDate(date){
+        if(date != null){
+            var newDate = new Date();
+            if(date>newDate){
+                return false;
+            }else{
+                return true;
+            }
+        }else{
+            return false;
+        }
+    }
 
+    /**
+     * Hàm thực hiện format Gender
+     * Author: Công Đoàn (22/07/2022)
+     */
     static formatGender(val){
         if(val == gender.genderMale){
             return "Nam";
@@ -29,8 +54,10 @@ export class Common {
         }
     
         if(val == gender.genderOther){
-            return "(Chưa xác định)"
+            return "Khác"
         }
     }
+
+
 }
 

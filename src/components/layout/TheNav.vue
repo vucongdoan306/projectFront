@@ -19,10 +19,14 @@
 import {listItemNav} from "../../JS/array.js";
 import BaseNavItem from "../base/BaseNavItem.vue";
 export default {
+    emits: ["is-opennav"],
     setup() {
         return {listItemNav};
     },
     props: {
+        /**
+         * Biến xác định đóng mở navigation
+         */
         isCloseNav: {
             type: Boolean,
             required: true,
@@ -32,6 +36,11 @@ export default {
         BaseNavItem,
     },
     methods: {
+        /**
+         * Hàm thực hiện mở nav
+         * @param {boolean} val biến điều kiện thu gọn navigation
+         * Author: Công Đoàn (15/07/2022)
+         */
         openNav(val){
             this.$emit('is-opennav',val);
         }
@@ -42,6 +51,4 @@ export default {
 
 <style lang="css">
     @import url(../../styles/base/nav.css);
-
-
 </style>

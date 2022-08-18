@@ -5,12 +5,17 @@
     padding: 0 16px;
 }
 
-.header__account>.box__icon{
+.header__account .box__icon{
     height: 40px;
     width: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 45px;
-    margin-right: 2px;
+
+}
+
+
+.header__account p {
+    margin-left: 6px;
 }

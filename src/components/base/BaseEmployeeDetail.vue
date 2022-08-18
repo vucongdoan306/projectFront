@@ -1,11 +1,17 @@
 <template>
+
+    <!-- Dialog Start -->
+
     <div class="dialog" id="dlgEmployeeDetail">
         <div class="employee__detail popup popup--add">
+
+            <!-- Header Dialog Employee -->
             <div class="popup__header">
                 <div class="popup__label">
                     <div class="popup__title">Thông tin nhân viên</div>
                     <div class="checkbox__container">
-                        <base-checkbox></base-checkbox>
+                        <base-checkbox
+                        ></base-checkbox>
                         <span>Là khách hàng</span>
                     </div>
 
@@ -18,26 +24,32 @@
 
                 <div class="popup__close">
                     <base-box-icon :classIcon="'icon__question22'" :sizeIcon="'pdr--6'" title="Giúp"></base-box-icon>
-                    <base-box-icon :classIcon="'icon__close18'" title="Đóng" @click="closeThisDialog()"></base-box-icon>
+                    <base-box-icon :classIcon="'icon__close18'" :title="'Đóng'" @click="validateCloseDialog()"></base-box-icon>
                 </div>
             </div>
 
-            <!-- content -->
+            <!-- Content Dialog -->
             <div class="popup__content">
-                <!-- up -->
+                <!-- Content Up -->
                 <div class="popup__content__up w--full">
                     
-                    <!-- left -->
+                    <!-- Content Up Left -->
                     <div class="popup__content__left w--50 pdr--26">
                         <div class="flex">
                             <div class="w--40 popup__row pdr--6">
                                 <label for="">Mã <span>*</span></label>
 
                                 <base-input
+                                :tabIndex="1"
+                                ref="focusCode"
                                 :typeInput="'text'"
                                 :placeholderInput="'Nhập mã'"
-                                v-model="this.employee.EmployeeCode" 
+                                v-model="this.employee.employeeCode" 
                                 :idInput="'txtEmployeeCode'"
+                                @check-empty="this.isEmptyInput.employeeCode = validateBlurInput(this.employee.employeeCode)"
+                                :classInput="{'border--error' : this.isEmptyInput.employeeCode}"
+                                :titleInput="this.isEmptyInput.employeeCode ? 'Thông tin không được để trống':''"
+                                @keydown.tab="preFocus($event)"
                                 ></base-input>
 
                             </div>
@@ -46,11 +58,15 @@
                                 <label for="">Tên <span>*</span></label>
 
                                 <base-input
+                                :tabIndex="2"
+                                ref="focusName"
                                 :typeInput="'text'"
                                 :placeholderInput="'Nhập tên'"
                                 :idInput="'txtFullName'"
-                                v-model="this.employee.FullName"
-
+                                v-model="this.employee.fullName"
+                                @check-empty="this.isEmptyInput.employeeFullName = validateBlurInput(this.employee.fullName)"
+                                :classInput="{'border--error' : this.isEmptyInput.employeeFullName,'text--capitalize':true}"
+                                :titleInput="this.isEmptyInput.employeeFullName ? 'Thông tin không được để trống':''"
                                 ></base-input>
 
                             </div>
@@ -58,12 +74,18 @@
 
                         <div class="w--full popup__row">
                             <label for="">Đơn vị <span>*</span></label>
-                            <base-combobox 
-                            :dataCombobox="department" 
-                            @select-item="selectedItemCombobox" 
-                            :dataSelected="departmentSelected"
-
-                            ></base-combobox>
+                            <BaseCombox
+                            :tabIndex="3"
+                            :controller="'Departments'"
+                            :codeData="'departmentCode'"
+                            :idData="'departmentId'"
+                            :nameData="'departmentName'"
+                            @bind-data="selectedItemCombobox"
+                            @resetCombobox="resetCombobox"
+                            ref="combobox"
+                            :mainData="this.department"
+                            :bindingData="this.departmentSelected"
+                            />
                             
                         </div>
 
@@ -74,52 +96,41 @@
                                 :typeInput="'text'"
                                 :placeholderInput="''"
                                 :idInput="'txtPositionName'"
-                                v-model="employee.PositionName"
+                                v-model="employee.positionName"
+                                :tabIndex="4"
                             ></base-input>
 
                         </div>
                     </div>
 
-                    <!-- right -->
+                    <!-- Content Up right -->
                     <div class="popup__content__right w--50">
                         <div class="w--full flex">
                             <div class="w--40 popup__row pdr--6">
                                 <label for="">Ngày sinh</label>
-                                <base-date class="mt-16" :labelMode="'hidden'" :stylingMode="'outlined'" v-model="employee.DateOfBirth" @onValueChanged="onDateBoxChanged"></base-date>
+
+                                <base-date
+                                class="mt-16" 
+                                :labelMode="'hidden'" 
+                                :stylingMode="'outlined'" 
+                                v-model="employee.dateOfBirth"
+                                @onValueChanged="onDateBoxChanged"
+                                ref="date"
+                                ></base-date>
 
                             </div>
 
                             <div class="w--60 popup__row pdl--10">
                                 <label for="">Giới tính</label>
                                 <div class="flex--spbetween pdb--6">
-                                    <base-radiobox
-                                    :label="'Nam'"
-                                    :name="'Gender'"
-                                    :value="typeGender.male"
-                                    v-model="employee.Gender"
-                                    @change="checkGender(typeGender.male)"
-                                    ref="Male"
-                                    :checked="true"
-                                    ></base-radiobox>
-
-                                    <base-radiobox
-                                    :label="'Nữ'"
-                                    :name="'Gender'"
-                                    :value="typeGender.female"
-                                    v-model="employee.Gender"
-                                    @change="checkGender(typeGender.female)"
-                                    ref="Female"
-                                    ></base-radiobox>
-
-                                    <base-radiobox
-                                    :label="'Khác'"
-                                    :name="'Gender'"
-                                    :value="typeGender.other"
-                                    v-model="employee.Gender"
-                                    @change="checkGender(typeGender.other)"
-                                    ref="Other"
-                                    ></base-radiobox>
-                                    
+                                    <base-radio
+                                    :tabIndex="6"
+                                    :data="this.gender"
+                                    :bindChecked="this.employee.gender"
+                                    :spaceLabel="'radio__item__gender'"
+                                    @bind-data="setEmployeeGender"
+                                    >
+                                    </base-radio>
                                 </div>
                             </div>
                         </div>
@@ -131,16 +142,20 @@
                                     :typeInput="'text'"
                                     :placeholderInput="''"
                                     :idInput="'txtIdentityNumber'"
-                                    v-model="employee.IdentityNumber"
-                                    
+                                    v-model="employee.identityNumber"
+                                    :tabIndex="9"
                                 ></base-input>
                             </div>
 
                             <div class="w--40 popup__row">
                                 <label for="">Ngày cấp</label>
-                                <div class="input pd--0">
-                                    <input type="text" class="celendar input__text" placeholder="DD/MM/YYYY" name="checkin"  value="" >
-                                </div>
+                                <base-date class="mt-16" 
+                                :labelMode="'hidden'" 
+                                :stylingMode="'outlined'"
+                                v-model="employee.identityDate"
+                                ref="dateIdentity"
+                                ></base-date>
+                            
                             </div>
                         </div>
 
@@ -150,13 +165,17 @@
                                 :typeInput="'text'"
                                 :placeholderInput="''"
                                 :idInput="''"
+                                v-model="employee.identityPlace"
+                                :tabIndex="11"
+                                :classInput="'text--capitalize'"
+                                
                             ></base-input>
                         </div>
                     </div>
 
                 </div>
 
-                <!-- down -->
+                <!-- Content down -->
                 <div class="popup__content__down w--full mgt--32">
                     <div class="w--full  popup__row">
                         <label for="">Địa chỉ</label>
@@ -164,6 +183,10 @@
                             :typeInput="'text'"
                             :placeholderInput="''"
                             :idInput="''"
+                            v-model="employee.address"
+                            :tabIndex="12"
+                            :classInput="'text--capitalize'"
+
                         ></base-input>
                     </div>
 
@@ -174,6 +197,8 @@
                                 :typeInput="'text'"
                                 :placeholderInput="''"
                                 :idInput="''"
+                                v-model="employee.phoneNumber"
+                                :tabIndex="13"
                             ></base-input>
                         </div>
                         <div class="w--25 popup__row pdr--6">
@@ -182,6 +207,8 @@
                                 :typeInput="'text'"
                                 :placeholderInput="''"
                                 :idInput="''"
+                                :tabIndex="14"
+                                v-model="employee.telephoneFax"
                             ></base-input>
                         </div>
                         <div class="w--25 popup__row">
@@ -190,6 +217,12 @@
                                 :typeInput="'text'"
                                 :placeholderInput="''"
                                 :idInput="''"
+                                v-model="employee.email"
+                                @check-empty="validateEmailBlur()"
+                                ref="focusEmail"
+                                :classInput="{'border--error' : !this.isEmptyInput.employeeEmail}"
+                                :titleInput="!this.isEmptyInput.employeeEmail ? 'Email không đúng định dạng':''"
+                                :tabIndex="15"
                             ></base-input>
                         </div>
                     </div>
@@ -197,9 +230,13 @@
                     <div class="w--full flex">
                         <div class="w--25 popup__row pdr--6">
                             <label for="">Tài khoản ngân hàng</label>
-                            <div class="input">
-                                <input type="text" name="" id="" class="input__text">
-                            </div>
+                            <base-input
+                                :typeInput="'text'"
+                                :placeholderInput="''"
+                                v-model="employee.bankAccount"
+                                :idInput="''"
+                                :tabIndex="16"
+                            ></base-input>
                         </div>
                         <div class="w--25 popup__row pdr--6">
                             <label for="">Tên ngân hàng</label>
@@ -207,6 +244,8 @@
                                 :typeInput="'text'"
                                 :placeholderInput="''"
                                 :idInput="''"
+                                v-model="employee.bankName"
+                                :tabIndex="17"
                             ></base-input>
                         </div>
                         <div class="w--25 popup__row">
@@ -215,115 +254,159 @@
                                 :typeInput="'text'"
                                 :placeholderInput="''"
                                 :idInput="''"
+                                v-model="employee.bankBranch"
+                                :tabIndex="18"
                             ></base-input>
                         </div>
                     </div>
 
-
-                    
                 </div>
+
+                <!-- Content Line ngăn cách -->
                 <div class="popup__line"></div>
-                <!-- footer -->
+
+
+                <!-- Content footer -->
                 <div class="popup__footer">
                     <base-button
                     :classButton="'button--white pd--6-16'"
                     :textButton="'Hủy'"
+                    @click="closeThisDialog()"
+                    :tabIndex="21"
                     ></base-button>
                     <div class="footer__right">
                         <base-button
                         :classButton="'mgr--8 button--white pd--6-16'"
                         :textButton="'Cất'"
-                        @click="btnSaveEmployee()"
+                        :titleButton="'Cất (Ctrl + S)'"
+                        @click="btnSaveEmployee(this.modeSave.close)"
+                        :tabIndex="19"
                         ></base-button>
 
                         <base-button
-                        :classButton="'pd--6-16'"
+                        :classButton="'pd--6-16 button--red'"
                         :textButton="'Cất và Thêm'"
+                        @click="btnSaveEmployee(this.modeSave.add)"
+                        :titleButton="'Cất và thêm'"
+                        :tabIndex="20"
+                        ></base-button>
+
+                        <base-button
+                        :classButton="'w--0 pd--0'"
+                        @click="btnSaveEmployee(this.modeSave.add)"
+                        @keyup="reFocus()"
+                        :tabIndex="22"
+                        ref="buttonSaveAdd"
                         ></base-button>
                     </div>
+
                 </div>
             </div>
 
         </div>
     </div>
+
+    <!-- Base Popup Thông báo -->
+    <base-popup 
+    v-if="isShowPopup" 
+    :classPopup="selectedPopup" 
+    :isQuestion="typePopup.question"
+    :isDanger="typePopup.danger"
+    :isDelete="typePopup.delete"
+    :isRegular="typePopup.regular"
+    :status="statusPopup"
+    @close-popup="closePopupNotification"
+    @close-dialog-detail="closeThisDialog(true)"
+    @save-dialog-detail="btnSaveEmployee(this.modeSave.close)"
+    ></base-popup>
+
+    <!-- <base-toast ref="toasti"></base-toast> -->
 </template>
 
 <script>
+import BaseCombox from "./BaseCombox.vue";
 import BaseDate from "./BaseDate.vue";
 import BaseCheckbox from "./BaseCheckbox.vue";
 import BaseBoxIcon from "./BaseBoxIcon.vue";
 import BaseInput from "./BaseInput.vue";
-import BaseRadiobox from "../base/BaseRadiobox.vue";
 import BaseButton from "../base/BaseButton.vue";
-import BaseCombobox from "../base/BaseCombobox.vue";
+import EmployeeApi from "@/APIs/EmployeeApi.js";
 import {typeGender,selectedMode} from "../../JS/array.js";
 import {Common} from "../../JS/common.js";
-import axios from "axios";
-// import BaseTest from "../base/BaseTest.vue";
+import BasePopup from "./BasePopup.vue";
+import CommonAPI from "../../APIs/CommonApi.js";
+import BaseRadio from "../base/BaseRadio.vue";
+// import BaseToast from "../base/BaseToast.vue";
+// import axios from "axios";
+
 
 export default {
+    emits: ["re-mode-add","reModeAdd","close-employeedetail","reload-data","set-mode-add","setAddMode","new-toast-message","new-toast-error","toast-email-error"],
     setup() {
         return {typeGender,Common,selectedMode};
     },
     created() {
-        var depart = this;
-        axios.get("https://cukcuk.manhnv.net/api/v1/Departments").then((respon) => {
-            // console.log(respon.data);
-            depart.department = respon.data;
-            // this.totalEmployee = respon.data.length;
-            // console.log(this.totalEmployee);
-        }).catch((err) => {
-            console.log(err);
+        var me = this;
+        CommonAPI.getAll("Departments").then((respon)=>{
+            me.department = respon.data;
         });
-
-    },
-    mounted() {
+        // Thực hiện bind data nếu là edit còn không là thêm mới 
         if(this.modeDetail == selectedMode.edit){
             this.setEditEmployee(this.employeeSelectedId);
-        }else{
+        }else if(this.modeDetail == selectedMode.add){
             this.getNewEmployee();
+        }else if(this.modeDetail == selectedMode.clone){
+            this.cloneEmployee(this.employeeSelectedId);
         }
+    },
+    mounted() {
+        // Đưa focus về ô input đầu tiên
+        this.$nextTick(() => {
+            this.$refs.focusCode.setFocus();
+        })
+
+        let x = this.$refs.date.$el.querySelector(".dx-texteditor-input");
+        x.setAttribute("tabindex", 5);
+        let y = this.$refs.dateIdentity.$el.querySelector(".dx-texteditor-input");
+        y.setAttribute("tabindex", 10);
+
     },
     watch:{
+
+        /**
+         * Hàm theo dõi sự thay đổi của EmployeeId được chọn và thực hiện nếu đang ở edit
+         * Author: Công Đoàn (20/07/2022)
+         */
         employeeSelectedId: function(value){
-            // var me = this;
-            // if(value){
-            //     console.log(value);
-            //     axios.get(`https://cukcuk.manhnv.net/api/v1/Employees/${me.employeeSelectedId}`).then((respon) => {
-            //         me.employee = respon.data;
-            //         // console.log(me.employee.FullName);
-            //         // me.employee.DateOfBirth = formatDate(me.employee.DateOfBirth);
-            //         // me.employee.PositionName = me.employeeDetail.PositionName;
-            //         me.checkBindGender(me.employee.Gender)
-            //         me.employee.DepartmentName = me.employeeSelected.DepartmentName;
-            //         me.departmentSelected.DepartmentName = me.employee.DepartmentName;
-            //         me.departmentSelected.DepartmentId = me.employee.DepartmentId;
-            //         me.departmentSelected.DepartmentCode = me.employee.DepartmentCode;
-            //     }).catch((err) => {
-            //         console.log(err);
-            //     });
-            // }else{
-            //     // me.$refs.Male.isChecked = true;
-            //     me.employee={};
-            // }
-            this.setEditEmployee(value);
+            if(this.modeDetail == selectedMode.edit){
+                this.setEditEmployee(value);
+            }
+
+            if(this.modeDetail == selectedMode.clone){
+                this.cloneEmployee(value);
+            }
         },
+
+        /**
+         * Hàm theo dõi sự thay đổi của mode được chọn và tạo mới code nếu đang ở add
+         * Author: Công Đoàn (20/07/2022)
+         */
         modeDetail: function(value){
             var me = this;
-            // console.log(10);
             if(value == selectedMode.add){
-                axios.get(`https://cukcuk.manhnv.net/api/v1/Employees/NewEmployeeCode`).then((respon) => {
-                    me.employee.EmployeeCode = respon.data;
+                EmployeeApi.getNewEmployeeCode().then((respon)=>{
+                    me.employee.employeeCode = respon.data;
                     me.$refs.Male.isChecked = true;
-                }).catch((err) => {
+                }).catch((err)=>{
                     console.log(err);
                     me.$refs.Male.isChecked = true;
-                });
+                })
             }
-        }
+        },
+
     },
     components:{
-        BaseCheckbox,BaseBoxIcon,BaseInput,BaseRadiobox,BaseButton,BaseDate,BaseCombobox
+        BaseCheckbox,BaseBoxIcon,BaseInput,BaseButton,BaseDate,BasePopup,BaseCombox,BaseRadio,
     },
     props:{
         isOpenThis:{
@@ -342,38 +425,113 @@ export default {
 
     },
     methods: {
+        /**
+         * Hàm theo lấy ra data được chọn trong combobox
+         * @param {object} data lưu danh department
+         * Author: Công Đoàn (22/07/2022)
+         */
         selectedItemCombobox(data){
             this.departmentSelected = data;
+            this.employee.departmentId = data.departmentId;
         },
+
+        /**
+         * Hàm thực hiện chọn gender 
+         * @param {number} value giá trị phân biệt giới tính
+         * Author: Công Đoàn (29/07/2022)
+         */
+        setEmployeeGender(value){
+            this.employee.Gender = value;
+        },
+
+        /**
+         * Hàm thực hiện reset lại combobox
+         * Author: Công Đoàn (29/07/2022)
+         */
+        resetCombobox(){
+            this.employee.departmentId = "";
+        },
+
+        /**
+         * Hàm thực hiện đóng dialog này
+         * Author: Công Đoàn (22/07/2022)
+         */
         closeThis(){
             this.$emit('close-employeedetail');
         },
-        btnSaveEmployee(){
+
+        /**
+         * Hàm thực hiện cất hoặc thêm mới nhân viên khi theo chế độ add hoặc edit
+         * @param {number} mode biến xác định chế độ lưu
+         * Author: Công Đoàn (22/07/2022)
+         */
+        btnSaveEmployee(mode){
             try{
                 var me = this;
-                me.employee.DepartmentId = this.departmentSelected.DepartmentId;
-                // this.validateData();
-                if(this.validateComplete == true){
-                    if(this.modeDetail == selectedMode.add){
-                        axios.post(`https://cukcuk.manhnv.net/api/v1/Employees`,me.employee).then(function () {
-                            me.closeThisDialog(true);
+                // 1.Thực hiện validate và hiển thị popup thông báo nếu có lỗi xảy ra
+                me.validateAllInput();
+                // 2. Nếu không có lỗi thì thực hiện cất hoặc thêm mới theo chế được
+                if(me.validateComplete == true){
+                    // Thực hiện thêm mới nếu ở chế độ thêm
+                    if(me.modeDetail == selectedMode.add || me.modeDetail == selectedMode.clone){
+                        EmployeeApi.saveEmployee(me.employee).then(function(){
+                                 // Đóng form nếu chọn cất
+                            if(mode==me.modeSave.close){
+                                me.closeThisDialog(true);
+                            }else{
+                                // Giữ lại form nếu chọn cất và thêm mới
+                                me.resetDetail();
+                                me.$emit('re-mode-add');
+                            }
                             me.$emit('reload-data');
+                            let status = "Thêm mới thành công"
+                            me.$emit('new-toast-message',status);
+
                         }).catch((err) => {
-                            // switch(err.response.status) {
-                            //     case 500:
-                            //        me.checkDuplicate = "Mã nhân viên <" + me.employee.EmployeeCode +"> đã tồn tại trong hệ thống. Vui lòng kiểm tra lại";
-                            //        me.isShowPopup.regular = true;
-                            //        break;
-                            // }
+                            me.validateComplete = false;
+                            switch(err.response.status) {
+                                
+                                case 500:
+                                    me.resetPopupNotification();
+                                    me.statusPopup = "Mã nhân viên <" + me.employee.employeeCode +"> đã tồn tại trong hệ thống. Vui lòng kiểm tra lại";
+                                    me.typePopup.regular = true;
+                                    me.selectedPopup = me.iconPopup.regular;
+                                    me.isShowPopup = true;
+                                    // me.$emit('new-toast-error',"Mã nhân viên <" + me.employee.employeeCode +"> đã tồn tại!");
+                                    break;
+                            }
                             console.log(err);
                         });
+
                     }else{
-                        axios.put(`https://cukcuk.manhnv.net/api/v1/Employees/${me.employeeSelectedId}`,me.employee).then(function () {
-                            me.closeThisDialog(true);
+                        // Thực hiện cập nhật dữ liệu nếu ở chế độ edit
+                        EmployeeApi.editEmployee(me.employeeSelectedId,me.employee).then(function(){
                             me.$emit('reload-data');
+                            me.$emit('new-toast-message',"Cập nhật thành công");
+                            if(mode==me.modeSave.close){
+                                me.closeThisDialog(true);
+                            }else{
+                                me.resetDetail();
+                                // me.$emit('set-mode-add');
+                                me.$emit('re-mode-add');
+                            }
+
+
                         }).catch((err) => {
                             console.log(err);
+                            switch(err.response.status) {
+                                case 500:
+                                    me.resetPopupNotification();
+                                    me.statusPopup = "Mã nhân viên <" + me.employee.employeeCode +"> đã tồn tại trong hệ thống. Vui lòng kiểm tra lại";
+                                    me.typePopup.regular = true;
+                                    me.selectedPopup = me.iconPopup.regular;
+                                    me.isShowPopup = true;
+                                    me.$emit('new-toast-error',"Mã nhân viên <" + me.employee.employeeCode +"> đã tồn tại!");
+                                    break;
+                            }
+                            console.log(err);
                         });
+                        
                     }
                 }
             }catch(err){
@@ -381,6 +539,11 @@ export default {
             }           
         },
 
+        /**
+         * Hàm thực hiện checked radio Gender khi người dùng chọn sửa
+         * @param {number} value biến phân biệt giới tính
+         * Author: Công Đoàn (25/07/2022)
+         */
         checkBindGender(value){
             if(value == typeGender.male){
                 this.$refs.Male.isChecked = true;
@@ -391,55 +554,79 @@ export default {
             } 
         },
 
-        checkGenderDefault(){
-            setTimeout(() => {
-                this.$refs.Male.isChecked = true;
-            }, 2000);
-        },
-
+        /**
+         * Hàm thực hiện đổi dữ liệu trong employee.Gender (giới tính) khi người dùng chọn radio box 
+         *  @param {number} value biến phân biệt giới tính
+         * Author: Công Đoàn (25/07/2022)
+         */
         checkGender(value){
             this.employee.Gender = value;
         },
 
+        /**
+         * Hàm thực hiện reset lại form
+         * Author: Công Đoàn (25/07/2022)
+         */
         resetDetail(){
             this.employee = {};
-            // this.isEmptyInput.code = false;
-            // this.isEmptyInput.name = false;
-            // this.isEmptyInput.department = false;
         },
+
+        /**
+         * Hàm thực hiện dóng dialog chi tiết nhân viên
+         * @param {boolean} isShowDialog biến xác định đóng mở dialog
+         * Author: Công Đoàn (25/07/2022)
+         */
         closeThisDialog(isShowDialog){
             this.resetDetail();
             this.$emit('close-employeedetail',isShowDialog);
         },
 
+        /**
+         * Hàm gọi API lấy ra mã nhân viên mới
+         * Author: Công Đoàn (25/07/2022)
+         */
         getNewEmployee(){
             var me = this;
             if(me.modeDetail == selectedMode.add){
-                console.log(me.modeDetail );
-                axios.get(`https://cukcuk.manhnv.net/api/v1/Employees/NewEmployeeCode`).then((respon) => {
-                    me.employee.EmployeeCode = respon.data;
-                    me.$refs.Male.isChecked = true;
-                }).catch((err) => {
+                EmployeeApi.getNewEmployeeCode().then((respon)=>{
+                    me.employee.employeeCode = respon.data;
+                    me.employee.gender = typeGender.male;
+                }).catch((err)=>{
                     console.log(err);
-                    me.$refs.Male.isChecked = true;
+                    me.employee.gender = typeGender.male;
+                })
+            }
 
-                });
+            if(me.modeDetail == selectedMode.clone){
+                EmployeeApi.getNewEmployeeCode().then((respon)=>{
+                    me.employee.employeeCode = respon.data;
+                }).catch((err)=>{
+                    console.log(err);
+                })
             }
         },
+
+        /**
+         * Hàm thực hiện binding dữ liệu lên form khi chọn edit từ bảng
+         * @param {string} empId biến lưu id của nhân viên 
+         * Author: Công Đoàn (25/07/2022)
+         */
         setEditEmployee(empId){
             var me = this;
             if(empId){
-                console.log(empId);
-                axios.get(`https://cukcuk.manhnv.net/api/v1/Employees/${empId}`).then((respon) => {
-                    me.employee = respon.data;
-                    // console.log(me.employee.FullName);
-                    // me.employee.DateOfBirth = formatDate(me.employee.DateOfBirth);
-                    // me.employee.PositionName = me.employeeDetail.PositionName;
-                    me.checkBindGender(me.employee.Gender)
-                    me.employee.DepartmentName = me.employeeSelected.DepartmentName;
-                    me.departmentSelected.DepartmentName = me.employee.DepartmentName;
-                    me.departmentSelected.DepartmentId = me.employee.DepartmentId;
-                    me.departmentSelected.DepartmentCode = me.employee.DepartmentCode;
+                EmployeeApi.getEmployeeByID(empId).then((respon)=>{
+                    console.log(respon.data[0]);
+                    me.employee = respon.data[0];
+                    if(me.employee.departmentId){
+                        CommonAPI.getByID("Departments",me.employee.departmentId).then((res)=>{
+                            me.departmentSelected = res.data[0];
+                        }).catch((er)=>{
+                            console.log(er);
+                        });
+                    }
+                    // Ép kiểu JSON để so sánh sư thay đổi
+                    const jsonBind = JSON.stringify(me.employee)
+                    me.bindEmployee = jsonBind;
                 }).catch((err) => {
                     console.log(err);
                 });
@@ -447,19 +634,380 @@ export default {
                 // me.$refs.Male.isChecked = true;
                 me.employee={};
             }
-        }
+        },
+
+        /**
+         * Hàm thực hiện nhân bản employee được chọn
+         * @param {string} empId biến lưu id của nhân viên 
+         * Author: Công Đoàn (15/08/2022)
+         */
+        cloneEmployee(empId){
+            this.setEditEmployee(empId);
+            this.getNewEmployee();
+        },
+
+        /**
+         * Hàm thực hiện reset object + status popup thông báo được các tham số về mặc định
+         * Author: Công Đoàn (25/07/2022)
+         */
+        resetPopupNotification(){
+            this.typePopup.danger = false;
+            this.typePopup.question = false;
+            this.typePopup.regular = false;
+            this.typePopup.delete = false;
+            this.selectedPopup = "";
+            this.statusPopup = "";
+        },
+
+        /**
+         * Hàm thực hiện đóng popup thông báo
+         * Author: Công Đoàn(25/07/2022)
+         */
+        closePopupNotification(){
+            this.resetPopupNotification()
+            this.isShowPopup = false;
+            this.$refs[this.focusEnd].setFocus();
+        },
+
+        /**
+         * Hàm thực hiện validate kiểm tra ô input trống khi blur
+         * @param {string} value text trong thẻ input
+         * Author: Công Đoàn (25/07/2022)
+         */
+        validateBlurInput(value){
+            if(!value){
+                return true;
+            }else{
+                return false;
+            }
+        },
+
+
+
+        /**
+         * Hàm validate tất cả sau khi thực hiện cất
+         * Author: Công Đoàn (25/07/2022)
+         */
+
+        validateAllInput(){
+            try{
+                // set validate trả true mặc định
+                this.validateComplete = true;
+                // Nếu mã hoặc tên hoặc đơn vị trống thì validate trả vê false và hiển thị thông báo cho người dùng
+                if(!this.employee.employeeCode){
+                    this.isEmptyInput.employeeCode = true;
+                    this.validateComplete = false;
+                }else{
+                    this.isEmptyInput.employeeCode = false;
+                }
+
+                if(!this.employee.fullName){
+                    this.isEmptyInput.employeeFullName = true;
+                    this.validateComplete = false;
+                }else{
+                    this.isEmptyInput.employeeFullName = false;
+                }
+
+                if(!this.employee.departmentId){
+                    this.$refs.combobox.validateBlur();
+                    this.validateComplete = false;
+                }
+
+                if(this.employee.email){
+                    if(!this.validateEmail(this.employee.email)){
+                        this.isEmptyInput.employeeEmail = false;
+                        this.validateComplete = false;
+                    }else{
+                        this.isEmptyInput.employeeEmail = true;
+                    }
+                }
+
+                if(this.employee.dateOfBirth){
+                    if(!Common.validateDate(this.employee.dateOfBirth)){
+                        this.isEmptyInput.employeeDateOfBirth = false;
+                        this.validateComplete = false;
+                    }else{
+                        this.isEmptyInput.employeeDateOfBirth = true;
+                    }
+                }
+
+                let x = this.$refs.date.$el.querySelector(".dx-texteditor-input");
+                let y = this.$refs.date.$el.querySelector(".dx-texteditor-input-container .dx-placeholder");
+
+                if(x.hasAttribute('aria-invalid') && y.classList.contains('dx-state-invisible')){
+                    this.validateComplete = false;
+                }
+
+
+
+                // HIển thị thông báo nếu có lỗi xảy ra (khi mã hoặc tên hoặc đơn vị trống)
+                // 1. Nếu employeeCode trống thì hiển thị thông báo
+                // 2. Nếu tên để trống thì hiển thị thông báo
+                // 3. Nếu departmentID trống thì hiển thị thông báo
+                // 4. Nếu Email không đúng định dạng thì hiển thị thông báo
+                if(!this.employee.employeeCode == true){
+                    this.focusEnd = "focusCode";
+                    this.resetPopupNotification();
+                    this.typePopup.danger = true;
+                    this.selectedPopup = this.iconPopup.danger;
+                    this.statusPopup = "Mã không được để trống"
+                    this.isShowPopup = true;
+                }else if(!this.employee.fullName == true){
+                    this.focusEnd = "focusName";
+                    this.resetPopupNotification();
+                    this.typePopup.danger = true;
+                    this.selectedPopup = this.iconPopup.danger;
+                    this.statusPopup = "Tên không được để trống"
+                    this.isShowPopup = true;
+                }else if(!this.employee.departmentId){
+                    this.focusEnd = "combobox";
+                    this.resetPopupNotification();
+                    this.typePopup.danger = true;
+                    this.selectedPopup = this.iconPopup.danger;
+                    this.statusPopup = "Đơn vị không được để trống"
+                    this.isShowPopup = true;
+                }else if(this.employee.email){
+                    if(!this.validateEmail(this.employee.email)){
+                        this.focusEnd = "focusEmail";
+                        this.resetPopupNotification();
+                        this.typePopup.danger = true;
+                        this.selectedPopup = this.iconPopup.danger;
+                        this.statusPopup = "Email không đúng định dạng"
+                        this.isShowPopup = true;
+                    }
+                }else if(!Common.validateDate(this.employee.dateOfBirth) && this.employee.dateOfBirth){
+                    // let x = this.$refs.date.$el.querySelector(".dx-texteditor-input");
+                    this.resetPopupNotification();
+                    this.typePopup.danger = true;
+                    this.selectedPopup = this.iconPopup.danger;
+                    this.statusPopup = "Ngày sinh không được lớn hơn ngày hiện tại"
+                    this.isShowPopup = true;
+                }else if(x.hasAttribute('aria-invalid') && y.classList.contains('dx-state-invisible')){
+                    this.resetPopupNotification();
+                    this.typePopup.danger = true;
+                    this.selectedPopup = this.iconPopup.danger;
+                    this.statusPopup = "Ngày sinh không đúng định dạng"
+                    this.isShowPopup = true;
+                }
+                
+            }catch(err){
+                console.log(err);
+            }          
+        },
+
+        /**
+         * Hàm thực hiện kiểm tra có tồn tại dữ liệu khi thực hiện event đóng form
+         * Author: Công Đoàn (25/07/2022)
+         */
+
+        validateCloseDialog(){
+            // 1.Set giá trị validate close là true mặc định
+            this.isValidateClose = true;
+
+            // 2.Nếu mode là edit thì kiểm tra xem dữ liệu có khác với dữ liệu ban đầu được bind lên form không nếu khác thì thông báo có muốn cất không 
+            if(this.modeDetail == selectedMode.edit){
+
+                if( JSON.stringify(this.employee) != this.bindEmployee){
+                    this.isValidateClose = false;
+                    this.typePopup.question = true;
+                    this.selectedPopup = this.iconPopup.question;
+                    this.statusPopup = "Dữ liệu đã bị thay đổi. Bạn có muốn cất không?"
+                    this.isShowPopup = true;
+                }
+            }else if(this.employee.employeeCode||this.employee.fullName || this.employee.departmentId){
+                // 3. Kiểm tra nếu mode là add thì xem dữ liệu có rỗng không nếu không thì thông báo có muốn cất không
+                
+                this.isValidateClose = false;
+                this.typePopup.question = true;
+                this.selectedPopup = this.iconPopup.question;
+                this.statusPopup = "Dữ liệu đã bị thay đổi. Bạn có muốn cất không?"
+                this.isShowPopup = true;
+            }
+            // 4. Nếu không có data hoặc data không bị thay đổi thì đóng dialog
+            if(this.isValidateClose == true){
+                this.closeThisDialog(true);
+            }
+        },
+
+
+        /**
+         * Hàm thực hiện vòng lặp focus
+         * Author: Công Đoàn (02/08/2022)
+         */
+        reFocus(){
+            this.$nextTick(() => {
+                this.$refs.focusCode.setFocus();
+            })
+                
+        },
+
+        /**
+         * Thực hiện ngược vòng lặp focus
+         * Author: Công Đoàn (02/08/2022)
+         */
+        preFocus(e){
+            if(e.shiftKey){
+                this.$refs.buttonSaveAdd.setFocus();
+            }
+        },
+
+        /**
+         * Mô tả: Sự kiện thay đổi khi chọn ngày sinh
+         * Author: Công Đoàn (25/07/2022)
+         */
+
+        onDateBoxChanged(e){
+            this.employee.dateOfBirth = e.value;
+        },
+
+        /**
+         * Hàm thực hiện validateEmail
+         * @param {string} email Email của employee
+         * Author: Công Đoàn (30/07/2022)
+         */
+
+        validateEmail(email) {
+            if(!email){
+                return true;
+            }
+            if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {// eslint-disable-line
+                return true;
+            } else {
+                return false;
+            }
+        },
+
+        /**
+         * Hàm thực hiện validate email khi blur
+         * Author: Công Đoàn (14/08/2022)
+         */
+        validateEmailBlur(){
+            this.isEmptyInput.employeeEmail = this.validateEmail(this.employee.email);
+        },
+
+        /**
+         * Hàm thực hiện validate date
+         * @param {date} date biến lưu giá trị ngày tháng của employee
+         * Author: Công Đoàn (14/08/2022)
+         */
+
+        checkDate(date){
+            console.log(this.$refs.date.value);
+            if(/^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/.test(Common.formatDate(date))){// eslint-disable-line
+               console.log(true);
+               console.log(this.employee.dateOfBirth);
+               return true;
+            }else{
+                console.log(false);
+               console.log(date);
+
+                return false;
+            }
+        },
+        
     },
     data(){
         return {
-                departmentSelected: {
-                DepartmentName: "",
-                DepartmentCode: "",
-                DepartmentId: "",
-            },
-            employee: {},
-            department: {},
-            validateComplete: true,
 
+            /**
+             * Object lưu data đơn vị được chọn
+             */
+            departmentSelected: [],
+
+            /**
+             * Biến chứa data của toàn bộ đơn vị
+             */
+            department: [],
+
+            /**
+             * Object lưu data employee được chọn
+             */
+            employee: {},
+
+            /**
+             * Biến lưu giá trị validate
+             */
+            validateComplete: false,
+
+            /**
+             * Biến đóng mở popup
+             */
+            isShowPopup: false,
+            
+            /**
+             * Object phân biệt loại popup
+             */
+            typePopup:{
+                danger: false,
+                question: false,
+                regular: false,
+                delete: false,
+            },
+
+            /**
+             * Object chứa class icon popup
+             */
+            iconPopup:{
+                danger: "icon__warning--danger",
+                question: "icon__warning--question",
+                regular: "icon__warning--regular",
+                delete: "icon__warning--regular",
+            },
+
+            /**
+             * Object chứa loại popup đang được chọn
+             */
+            selectedPopup: "",
+
+            /**
+             * Status của popup thông báo
+             */
+            statusPopup: "",
+
+            /**
+             * Object lưu giá trị sau khi validate blur input
+             */
+            isEmptyInput:{
+                employeeCode: false,
+                employeeFullName: false,
+                employeeDepartment: false,
+                employeeEmail: true,
+                employeeDateOfBirth: false,
+                employeeIdentityDate: false,
+            },
+
+            /**
+             * Object lựa chọn cất hoặc cất và thêm
+             */
+            modeSave:{
+                close: 1,
+                add: 2,
+            },
+
+            /**
+             * Biến lưu sự lựa chọn cất hoặc cất và thêm
+             */
+            modeSaveSelected: 1,
+
+            /**
+             * Biến lưu giá trị validate đóng form
+             */
+            isValidateClose: true,
+
+            /**
+             * Biến lưu ref input cần được focus
+             */
+            focusEnd: "focusCode",
+
+            /**
+             * Array lưu object giá trị của giới tính
+             */
+            gender: [{value: 0, name: "Nam"},{value: 1, name: "Nữ"},{value: 2, name: "Khác"}],
+
+            /**
+             * Biến lưu giá trị đầu tiên data được đẩy lên
+             */
+            bindEmployee: {},
         }
     }
 }

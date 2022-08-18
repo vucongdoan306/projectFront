@@ -37,7 +37,7 @@
 }
 
 .combobox__data{
-    display: none;
+    /* display: none; */
     border: 1px solid #babec5;
     position: absolute;
     background-color: #fff;
@@ -62,7 +62,8 @@
     background-color: #F4F5F8;
 }
 
-.combobox__data--item:hover{
+/* .combobox__data--item:hover, */
+.combobox__data--selected{
     /* background-color: #EBEDF0; */
     color: #35bf22;
     background-color: #ebedf0;

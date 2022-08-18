@@ -7,6 +7,9 @@
 <script>
 export default{
     props:{
+        /**
+         * Prop thực hiện đóng mở nav
+         */
         isCloseNav: {
             type: Boolean,
             required: true,

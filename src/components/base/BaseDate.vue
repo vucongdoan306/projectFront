@@ -1,6 +1,8 @@
 <template>
     <DxDateBox class="ms-date-box" :styling-mode="stylingMode" :label-mode="labelMode" width="100%" :value="value"
-        :display-format="displayFormat" placeholder="Chọn ngày" label="Tiêu đề" @value-changed="onValueChanged">
+        :display-format="displayFormat" placeholder="DD/MM/YYY" label="Tiêu đề" @value-changed="onValueChanged"
+
+         >
         <DxValidator>
             <DxRequiredRule />
         </DxValidator>
@@ -16,11 +18,18 @@ import {
 import 'devextreme/dist/css/dx.light.css';
 import DxDateBox from 'devextreme-vue/date-box';
 export default {
+    emits: ["onValueChanged"],
     name: 'MsDate',
     components: {
         DxDateBox,
         DxValidator,
         DxRequiredRule,
+    },
+    watch:{
+        value: function(val){
+            this.date = val;
+            console.log('11111');
+        }
     },
     props: {
         value: {
@@ -39,6 +48,8 @@ export default {
             default: 'outlined',
             note: 'mode hiển thị loại style datebox ' // [ 'outlined', 'filled', 'underlined' ]
         },
+
+
         /**
          * const date = new Date(2021, 6, 15, 20, 45, 34);
  
@@ -59,6 +70,7 @@ export default {
     },
     data() {
         return {
+            date: null,
         }
     },
     created() {
@@ -71,10 +83,9 @@ export default {
          * @param {*} e event thay đổi
          */
         onValueChanged(e) {
-            // console.log(e.previousValue);
-            // console.log(e.value);
             this.$emit('onValueChanged', e);
-        }
+        },
+
     }
 };
 </script>
