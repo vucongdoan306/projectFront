@@ -1,5 +1,7 @@
 
-// Object lưu class routter và text của MenuITem
+/**
+ * Object lưu class routter và text của MenuITem
+ */
 export const listItemNav = [
     {classIcon:'icon__overview', text:'Tổng quan', routerItem:'/employees'},
     {classIcon:'icon__cash', text:'Tiền mặt', routerItem:'/test1'},
@@ -18,7 +20,9 @@ export const listItemNav = [
     {classIcon:'icon__analysis', text:'Phân tích tài chính',routerItem:'/test14'},
 ]
 
-// Mảng lưu giá trị pageSize
+/**
+ * Mảng lưu giá trị pageSize
+ */
 export const listSizePage = new Array('10','20','30','50','100');
 
 // Object kiểu giới tính
@@ -28,7 +32,9 @@ export const typeGender = {
     other: 2,
 }
 
-// Object mode
+/**
+ * Chế độ thực hiện (thêm, sửa, xóa, nhân bản)
+ */
 export const selectedMode={
     add: 1,
     edit: 2,
@@ -36,8 +42,11 @@ export const selectedMode={
     clone: 4,
 }
 
-
+/**
+ * Chế độ xóa
+ */
 export const deleteMode={
     single: 1,
     multi: 2,
 }
+

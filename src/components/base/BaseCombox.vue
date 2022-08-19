@@ -356,7 +356,7 @@ export default {
             }else{
                 this.validateEmpty = false;
             }
-        }
+        },
     },
 }
 </script>

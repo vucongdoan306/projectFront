@@ -1,9 +1,15 @@
+/**
+ * Biến phân biệt giới tính
+ */
 var gender = {
     genderMale: 0,
     genderFemale: 1,
     genderOther: 2,
 }
 
+/**
+ * Class gồm các hàm common
+ */
 export class Common {
 
     /**
@@ -20,6 +26,22 @@ export class Common {
         }else{
             return "";
         }
+
+        // if (date != null) {
+        //     date = new Date(date);
+        //     // lấy ra ngày
+        //     let day = date.getDate();
+        //     day = day < 10 ? `0${day}` : day;
+        //     //lấy ra tháng
+        //     let month = date.getMonth() + 1;
+        //     month = month < 10 ? `0${month}` : month;
+        //     //lấy ra năm
+        //     let year = date.getFullYear();
+        //     // Chuyển sang dạng dữ liệu ngày tháng năm
+        //     return `${day}/${month}/${year}`; // 18/06/2001
+        //     } else {
+        //     return "";
+        // }
     }
 
     /**
@@ -57,7 +79,5 @@ export class Common {
             return "Khác"
         }
     }
-
-
 }
 
