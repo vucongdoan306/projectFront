@@ -50,3 +50,15 @@ export const deleteMode={
     multi: 2,
 }
 
+/**
+ * Max length của từng trường
+ */
+
+export const maxLength={
+    code: 20,
+    default: 255,
+    phone: 50,
+    fullname: 100,
+    identity: 25,
+    email: 100,
+}

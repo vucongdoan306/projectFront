@@ -10,6 +10,7 @@
         @blur="checkEmpty()"
         @input="updateInput"
         :tabindex="tabIndex"
+        :maxlength="maxLength"
         ref="focus"     
         >
 
@@ -19,6 +20,7 @@
 </template>
 
 <script>
+
 export default {
     emits: ["check-empty","update:modelValue"],
     props:{
@@ -94,7 +96,16 @@ export default {
          */
         tabIndex:{
             type: Number,
+        },
+
+        /**
+         * Max length của input
+         */
+        maxLength:{
+            type: Number,
+            required: false,
         }
+
 
     },
     methods: {

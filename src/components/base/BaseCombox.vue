@@ -5,7 +5,7 @@
         class="combobox__input" 
         v-model="textName" 
         @input="filterInputChange()" 
-        @keyup="keyMonitor"
+        @keydown="keyMonitor"
         @blur="validateBlur(this.dataSelected)"
         :class="{'border--error': this.validateEmpty}"
         :title="this.validateEmpty ? 'Thông tin này không được để trống': ''"
@@ -302,7 +302,7 @@ export default {
 
 
         /**
-         * Hàm thực hiện xác định data selecting qua event keyup và chọn data selected qua event enter
+         * Hàm thực hiện xác định data selecting qua event keydown và chọn data selected qua event enter
          * Author: Công Đoàn (27/07/2022)
          */
         keyMonitor(e){
@@ -333,7 +333,10 @@ export default {
             }
 
             if(e.key === "Escape"){
-                this.isShowData = false;
+                if(this.isShowData == true){
+                    this.isShowData = false;
+                    e.stopPropagation();
+                }
             }
         },
 

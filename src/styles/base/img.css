@@ -244,3 +244,9 @@
 .icon.icon__refresh:hover {
     filter: brightness(0.5);
 }
+
+.icon__date{
+	background: no-repeat -128px -312px;
+	width: 16px;
+	height: 16px;
+}

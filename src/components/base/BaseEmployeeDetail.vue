@@ -2,7 +2,7 @@
 
     <!-- Dialog Start -->
 
-    <div class="dialog" id="dlgEmployeeDetail">
+    <div class="dialog" id="dlgEmployeeDetail" @keydown="keyMonitor">
         <div class="employee__detail popup popup--add">
 
             <!-- Header Dialog Employee -->
@@ -50,6 +50,7 @@
                                 :classInput="{'border--error' : this.isEmptyInput.employeeCode}"
                                 :titleInput="this.isEmptyInput.employeeCode ? 'Thông tin không được để trống':''"
                                 @keydown.tab="preFocus($event)"
+                                :maxLength="maxLength.code"
                                 ></base-input>
 
                             </div>
@@ -67,7 +68,10 @@
                                 @check-empty="this.isEmptyInput.employeeFullName = validateBlurInput(this.employee.fullName)"
                                 :classInput="{'border--error' : this.isEmptyInput.employeeFullName,'text--capitalize':true}"
                                 :titleInput="this.isEmptyInput.employeeFullName ? 'Thông tin không được để trống':''"
+                                :maxLength="maxLength.fullname"
                                 ></base-input>
+
+
 
                             </div>
                         </div>
@@ -98,6 +102,7 @@
                                 :idInput="'txtPositionName'"
                                 v-model="employee.positionName"
                                 :tabIndex="4"
+                                :maxLength="maxLength.default"
                             ></base-input>
 
                         </div>
@@ -108,15 +113,17 @@
                         <div class="w--full flex">
                             <div class="w--40 popup__row pdr--6">
                                 <label for="">Ngày sinh</label>
-
-                                <base-date
-                                class="mt-16" 
-                                :labelMode="'hidden'" 
-                                :stylingMode="'outlined'" 
-                                v-model="employee.dateOfBirth"
-                                @onValueChanged="onDateBoxChanged"
-                                ref="date"
-                                ></base-date>
+                                <base-datetime
+                                :bindValue="employee.dateOfBirth"
+                                @bind-value="(value)=>{this.employee.dateOfBirth = value}"
+                                :tabIndex="5"
+                                :typeDate="'date'"
+                                :placeholderDate="'DD/MM/YYYY'"
+                                :sizeDate="'default'"
+                                :formatDate="'DD/MM/YYYY'"
+                                ref="DateOfBirth"
+                                >
+                                </base-datetime>
 
                             </div>
 
@@ -144,17 +151,23 @@
                                     :idInput="'txtIdentityNumber'"
                                     v-model="employee.identityNumber"
                                     :tabIndex="9"
+                                    :maxLength="maxLength.identity"
                                 ></base-input>
                             </div>
 
                             <div class="w--40 popup__row">
                                 <label for="">Ngày cấp</label>
-                                <base-date class="mt-16" 
-                                :labelMode="'hidden'" 
-                                :stylingMode="'outlined'"
-                                v-model="employee.identityDate"
-                                ref="dateIdentity"
-                                ></base-date>
+                                <base-datetime
+                                :bindValue="employee.identityDate"
+                                @bind-value="(value)=>{this.employee.identityDate = value}"
+                                :tabIndex="10"
+                                :typeDate="'date'"
+                                :placeholderDate="'DD/MM/YYYY'"
+                                :sizeDate="'default'"
+                                :formatDate="'DD/MM/YYYY'"
+                                ref="IdentityDate"
+                                >
+                                </base-datetime>
                             
                             </div>
                         </div>
@@ -168,7 +181,7 @@
                                 v-model="employee.identityPlace"
                                 :tabIndex="11"
                                 :classInput="'text--capitalize'"
-                                
+                                :maxLength="maxLength.default"
                             ></base-input>
                         </div>
                     </div>
@@ -186,7 +199,7 @@
                             v-model="employee.address"
                             :tabIndex="12"
                             :classInput="'text--capitalize'"
-
+                            :maxLength="maxLength.default"
                         ></base-input>
                     </div>
 
@@ -199,6 +212,7 @@
                                 :idInput="''"
                                 v-model="employee.phoneNumber"
                                 :tabIndex="13"
+                                :maxLength="maxLength.phone"
                             ></base-input>
                         </div>
                         <div class="w--25 popup__row pdr--6">
@@ -209,6 +223,7 @@
                                 :idInput="''"
                                 :tabIndex="14"
                                 v-model="employee.telephoneFax"
+                                :maxLength="maxLength.phone"
                             ></base-input>
                         </div>
                         <div class="w--25 popup__row">
@@ -223,6 +238,7 @@
                                 :classInput="{'border--error' : !this.isEmptyInput.employeeEmail}"
                                 :titleInput="!this.isEmptyInput.employeeEmail ? 'Email không đúng định dạng':''"
                                 :tabIndex="15"
+                                :maxLength="maxLength.email"
                             ></base-input>
                         </div>
                     </div>
@@ -236,6 +252,7 @@
                                 v-model="employee.bankAccount"
                                 :idInput="''"
                                 :tabIndex="16"
+                                :maxLength="maxLength.default"
                             ></base-input>
                         </div>
                         <div class="w--25 popup__row pdr--6">
@@ -246,6 +263,7 @@
                                 :idInput="''"
                                 v-model="employee.bankName"
                                 :tabIndex="17"
+                                :maxLength="maxLength.default"
                             ></base-input>
                         </div>
                         <div class="w--25 popup__row">
@@ -256,6 +274,7 @@
                                 :idInput="''"
                                 v-model="employee.bankBranch"
                                 :tabIndex="18"
+                                :maxLength="maxLength.default"
                             ></base-input>
                         </div>
                     </div>
@@ -325,17 +344,17 @@
 
 <script>
 import BaseCombox from "./BaseCombox.vue";
-import BaseDate from "./BaseDate.vue";
 import BaseCheckbox from "./BaseCheckbox.vue";
 import BaseBoxIcon from "./BaseBoxIcon.vue";
 import BaseInput from "./BaseInput.vue";
 import BaseButton from "../base/BaseButton.vue";
 import EmployeeApi from "@/APIs/EmployeeApi.js";
-import {typeGender,selectedMode} from "../../JS/array.js";
+import {typeGender,selectedMode,maxLength} from "../../JS/array.js";
 import {Common} from "../../JS/common.js";
 import BasePopup from "./BasePopup.vue";
 import CommonAPI from "../../APIs/CommonApi.js";
 import BaseRadio from "../base/BaseRadio.vue";
+import BaseDatetime from "../base/BaseDatetime.vue";
 // import BaseToast from "../base/BaseToast.vue";
 // import axios from "axios";
 
@@ -343,7 +362,10 @@ import BaseRadio from "../base/BaseRadio.vue";
 export default {
     emits: ["re-mode-add","reModeAdd","close-employeedetail","reload-data","set-mode-add","setAddMode","new-toast-message","new-toast-error","toast-email-error"],
     setup() {
-        return {typeGender,Common,selectedMode};
+        return {typeGender,Common,selectedMode,maxLength};
+    },
+    components:{
+        BaseDatetime,BaseCheckbox,BaseBoxIcon,BaseInput,BaseButton,BasePopup,BaseCombox,BaseRadio,
     },
     created() {
         var me = this;
@@ -364,12 +386,6 @@ export default {
         this.$nextTick(() => {
             this.$refs.focusCode.setFocus();
         })
-
-        let x = this.$refs.date.$el.querySelector(".dx-texteditor-input");
-        x.setAttribute("tabindex", 5);
-        let y = this.$refs.dateIdentity.$el.querySelector(".dx-texteditor-input");
-        y.setAttribute("tabindex", 10);
-
     },
     watch:{
 
@@ -405,9 +421,7 @@ export default {
         },
 
     },
-    components:{
-        BaseCheckbox,BaseBoxIcon,BaseInput,BaseButton,BaseDate,BasePopup,BaseCombox,BaseRadio,
-    },
+
     props:{
         isOpenThis:{
             type: Boolean,
@@ -491,7 +505,7 @@ export default {
                             me.validateComplete = false;
                             switch(err.response.status) {
                                 
-                                case 500:
+                                case 400:
                                     me.resetPopupNotification();
                                     me.statusPopup = "Mã nhân viên <" + me.employee.employeeCode +"> đã tồn tại trong hệ thống. Vui lòng kiểm tra lại";
                                     me.typePopup.regular = true;
@@ -520,13 +534,13 @@ export default {
                         }).catch((err) => {
                             console.log(err);
                             switch(err.response.status) {
-                                case 500:
+                                case 400:
                                     me.resetPopupNotification();
                                     me.statusPopup = "Mã nhân viên <" + me.employee.employeeCode +"> đã tồn tại trong hệ thống. Vui lòng kiểm tra lại";
                                     me.typePopup.regular = true;
                                     me.selectedPopup = me.iconPopup.regular;
                                     me.isShowPopup = true;
-                                    me.$emit('new-toast-error',"Mã nhân viên <" + me.employee.employeeCode +"> đã tồn tại!");
+                                    // me.$emit('new-toast-error',"Mã nhân viên <" + me.employee.employeeCode +"> đã tồn tại!");
                                     break;
                             }
                             console.log(err);
@@ -631,7 +645,6 @@ export default {
                     console.log(err);
                 });
             }else{
-                // me.$refs.Male.isChecked = true;
                 me.employee={};
             }
         },
@@ -731,14 +744,11 @@ export default {
                     }
                 }
 
-                let x = this.$refs.date.$el.querySelector(".dx-texteditor-input");
-                let y = this.$refs.date.$el.querySelector(".dx-texteditor-input-container .dx-placeholder");
-
-                if(x.hasAttribute('aria-invalid') && y.classList.contains('dx-state-invisible')){
-                    this.validateComplete = false;
+                if(this.employee.identityDate){
+                    if(!Common.validateDate(this.employee.identityDate)){
+                        this.validateComplete = false;
+                    }
                 }
-
-
 
                 // HIển thị thông báo nếu có lỗi xảy ra (khi mã hoặc tên hoặc đơn vị trống)
                 // 1. Nếu employeeCode trống thì hiển thị thông báo
@@ -766,30 +776,28 @@ export default {
                     this.selectedPopup = this.iconPopup.danger;
                     this.statusPopup = "Đơn vị không được để trống"
                     this.isShowPopup = true;
-                }else if(this.employee.email){
-                    if(!this.validateEmail(this.employee.email)){
+                }else if(this.employee.email && !this.validateEmail(this.employee.email)){
                         this.focusEnd = "focusEmail";
                         this.resetPopupNotification();
                         this.typePopup.danger = true;
                         this.selectedPopup = this.iconPopup.danger;
                         this.statusPopup = "Email không đúng định dạng"
                         this.isShowPopup = true;
-                    }
                 }else if(!Common.validateDate(this.employee.dateOfBirth) && this.employee.dateOfBirth){
-                    // let x = this.$refs.date.$el.querySelector(".dx-texteditor-input");
+                    this.focusEnd = "DateOfBirth"
                     this.resetPopupNotification();
                     this.typePopup.danger = true;
                     this.selectedPopup = this.iconPopup.danger;
                     this.statusPopup = "Ngày sinh không được lớn hơn ngày hiện tại"
                     this.isShowPopup = true;
-                }else if(x.hasAttribute('aria-invalid') && y.classList.contains('dx-state-invisible')){
+                }else if(!Common.validateDate(this.employee.identityDate) && this.employee.identityDate){
+                    this.focusEnd = "IdentityDate"
                     this.resetPopupNotification();
                     this.typePopup.danger = true;
                     this.selectedPopup = this.iconPopup.danger;
-                    this.statusPopup = "Ngày sinh không đúng định dạng"
+                    this.statusPopup = "Ngày cấp không được lớn hơn ngày hiện tại"
                     this.isShowPopup = true;
                 }
-                
             }catch(err){
                 console.log(err);
             }          
@@ -904,6 +912,21 @@ export default {
                 return false;
             }
         }, 
+
+        /**
+         * Hàm thực hiện các sự kiện của form
+         * Author: Công Đoàn (18/08/2022)
+         */
+        keyMonitor(e){
+            if(e.key === "Escape"){
+                console.log(1000);
+                this.validateCloseDialog();
+            }
+            if(e.keyCode===83 && e.ctrlKey){
+                e.preventDefault();
+                this.btnSaveEmployee(this.modeSave.close);
+            }
+        }
         
     },
     data(){
