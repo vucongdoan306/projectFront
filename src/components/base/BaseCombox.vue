@@ -1,5 +1,5 @@
 <template>
-    <div class="combobox" :data-title="'Thông tin này không được để trống'" :class="{'tooltip__combobox':this.validateEmpty}">
+    <div class="combobox" :data-title="Resource.Validate_EmptyDepartment" :class="{'tooltip__combobox':this.validateEmpty}">
         <div ></div>
         <input type="text" 
         class="combobox__input" 
@@ -8,7 +8,6 @@
         @keydown="keyMonitor"
         @blur="validateBlur(this.dataSelected)"
         :class="{'border--error': this.validateEmpty}"
-        :title="this.validateEmpty ? 'Thông tin này không được để trống': ''"
         :tabindex="tabIndex"
         ref="focus"
         >
@@ -41,10 +40,11 @@
 <script>
 // import CommonAPI from "../../APIs/CommonApi.js";
 import {Common} from "../../JS/common";
+import {Resource} from "../../JS/resource";
 export default {
     setup(){
         return {
-            Common,
+            Common,Resource,
         }
     },
     props:{

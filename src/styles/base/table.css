@@ -166,3 +166,9 @@ tr:hover{
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+.nowrap:hover{
+    text-overflow: clip;
+    white-space: normal;
+    word-break: break-all;
+}

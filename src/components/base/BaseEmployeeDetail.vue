@@ -47,7 +47,7 @@
                                 :idInput="'txtEmployeeCode'"
                                 @check-empty="this.isEmptyInput.employeeCode = validateBlurInput(this.employee.employeeCode)"
                                 :classInput="{'border--error' : this.isEmptyInput.employeeCode}"
-                                :titleInput="this.isEmptyInput.employeeCode ? 'Thông tin không được để trống':''"
+                                :titleInput="this.isEmptyInput.employeeCode ? Resource.Validate_EmptyCode:''"
                                 @keydown.tab="preFocus($event)"
                                 :maxLength="maxLength.code"
                                 ></base-input>
@@ -64,7 +64,7 @@
                                 v-model="this.employee.fullName"
                                 @check-empty="this.isEmptyInput.employeeFullName = validateBlurInput(this.employee.fullName)"
                                 :classInput="{'border--error' : this.isEmptyInput.employeeFullName}"
-                                :titleInput="this.isEmptyInput.employeeFullName ? 'Thông tin không được để trống':''"
+                                :titleInput="this.isEmptyInput.employeeFullName ? Resource.Validate_EmptyFullName : ''"
                                 :maxLength="maxLength.fullname"
                                 :isUpperBehindSpace="true"
                                 ></base-input>
@@ -197,7 +197,7 @@
 
                     <div class="w--full flex">
                         <div class="w--25 popup__row pdr--6">
-                            <label for="">ĐT di động</label>
+                            <label for="" title="Điện thoại di động">ĐT di động</label>
                             <base-input
                             :typeInput="'text'"
                             :placeholderInput="''"
@@ -208,7 +208,7 @@
                             ></base-input>
                         </div>
                         <div class="w--25 popup__row pdr--6">
-                            <label for="">ĐT cố định</label>
+                            <label for="" title="Điện thoại cố định">ĐT cố định</label>
                             <base-input
                             :typeInput="'text'"
                             :placeholderInput="''"
@@ -228,7 +228,7 @@
                             @check-empty="validateEmailBlur()"
                             ref="focusEmail"
                             :classInput="{'border--error' : !this.isEmptyInput.employeeEmail}"
-                            :titleInput="!this.isEmptyInput.employeeEmail ? 'Email không đúng định dạng':''"
+                            :titleInput="!this.isEmptyInput.employeeEmail ? Resource.Validate_EmailNotValid :''"
                             :tabIndex="15"
                             :maxLength="maxLength.email"
                             ></base-input>
@@ -341,6 +341,7 @@ import BaseButton from "../base/BaseButton.vue";
 import EmployeeApi from "@/APIs/EmployeeApi.js";
 import {typeGender,selectedMode,maxLength} from "../../JS/array.js";
 import {Common} from "../../JS/common.js";
+import {Resource} from "../../JS/resource.js";
 import BasePopup from "./BasePopup.vue";
 import CommonAPI from "../../APIs/CommonApi.js";
 import BaseRadio from "../base/BaseRadio.vue";
@@ -352,23 +353,23 @@ import BaseDatetime from "../base/BaseDatetime.vue";
 export default {
     emits: ["re-mode-add","reModeAdd","close-employeedetail","reload-data","set-mode-add","setAddMode","new-toast-message","new-toast-error","toast-email-error"],
     setup() {
-        return {typeGender,Common,selectedMode,maxLength};
+        return {Resource,typeGender,Common,selectedMode,maxLength};
     },
     components:{
         BaseDatetime,BaseCheckbox,BaseBoxIcon,BaseInput,BaseButton,BasePopup,BaseCombox,BaseRadio,
     },
-    created() {
+    async created() {
         var me = this;
-        CommonAPI.getAll("Departments").then((respon)=>{
+        await CommonAPI.getAll("Departments").then((respon)=>{
             me.department = respon.data;
         });
         // Thực hiện bind data nếu là edit còn không là thêm mới 
         if(this.modeDetail == selectedMode.edit){
-            this.setEditEmployee(this.employeeSelectedId);
+            await this.setEditEmployee(this.employeeSelectedId);
         }else if(this.modeDetail == selectedMode.add){
-            this.getNewEmployee();
+            await this.getNewEmployee();
         }else if(this.modeDetail == selectedMode.clone){
-            this.cloneEmployee(this.employeeSelectedId);
+            await this.cloneEmployee(this.employeeSelectedId);
         }
     },
     mounted() {
@@ -474,6 +475,14 @@ export default {
                 var me = this;
                 // 1.Thực hiện validate và hiển thị popup thông báo nếu có lỗi xảy ra
                 me.validateAllInput();
+                if (this.employee.dateOfBirth)
+                    this.employee.dateOfBirth = Common.formatYMD(
+                    this.employee.dateOfBirth
+                );
+                if (this.employee.identityDate)
+                    this.employee.identityDate = Common.formatYMD(
+                    this.employee.identityDate
+                );
                 // 2. Nếu không có lỗi thì thực hiện cất hoặc thêm mới theo chế được
                 if(me.validateComplete == true){
                     // Thực hiện thêm mới nếu ở chế độ thêm
@@ -488,7 +497,7 @@ export default {
                                 me.$emit('re-mode-add');
                             }
                             me.$emit('reload-data');
-                            let status = "Thêm mới thành công"
+                            let status = Resource.Add_Complete;
                             me.$emit('new-toast-message',status);
 
                         }).catch((err) => {
@@ -497,7 +506,7 @@ export default {
                                 
                                 case 400:
                                     me.resetPopupNotification();
-                                    me.statusPopup = "Mã nhân viên <" + me.employee.employeeCode +"> đã tồn tại trong hệ thống. Vui lòng kiểm tra lại";
+                                    me.statusPopup = Resource.Validate_DuplicateCode(me.employee.employeeCode);
                                     me.typePopup.regular = true;
                                     me.selectedPopup = me.iconPopup.regular;
                                     me.isShowPopup = true;
@@ -511,7 +520,7 @@ export default {
                         // Thực hiện cập nhật dữ liệu nếu ở chế độ edit
                         EmployeeApi.editEmployee(me.employeeSelectedId,me.employee).then(function(){
                             me.$emit('reload-data');
-                            me.$emit('new-toast-message',"Cập nhật thành công");
+                            me.$emit('new-toast-message',Resource.Update_Complete);
                             if(mode==me.modeSave.close){
                                 me.closeThisDialog(true);
                             }else{
@@ -526,7 +535,7 @@ export default {
                             switch(err.response.status) {
                                 case 400:
                                     me.resetPopupNotification();
-                                    me.statusPopup = "Mã nhân viên <" + me.employee.employeeCode +"> đã tồn tại trong hệ thống. Vui lòng kiểm tra lại";
+                                    me.statusPopup = Resource.Validate_DuplicateCode(me.employee.employeeCode);
                                     me.typePopup.regular = true;
                                     me.selectedPopup = me.iconPopup.regular;
                                     me.isShowPopup = true;
@@ -589,10 +598,10 @@ export default {
          * Hàm gọi API lấy ra mã nhân viên mới
          * Author: Công Đoàn (25/07/2022)
          */
-        getNewEmployee(){
+        async getNewEmployee(){
             var me = this;
             if(me.modeDetail == selectedMode.add){
-                EmployeeApi.getNewEmployeeCode().then((respon)=>{
+                await EmployeeApi.getNewEmployeeCode().then((respon)=>{
                     me.employee.employeeCode = respon.data;
                     me.employee.gender = typeGender.male;
                 }).catch((err)=>{
@@ -602,7 +611,7 @@ export default {
             }
 
             if(me.modeDetail == selectedMode.clone){
-                EmployeeApi.getNewEmployeeCode().then((respon)=>{
+                await EmployeeApi.getNewEmployeeCode().then((respon)=>{
                     me.employee.employeeCode = respon.data;
                 }).catch((err)=>{
                     console.log(err);
@@ -615,10 +624,10 @@ export default {
          * @param {string} empId biến lưu id của nhân viên 
          * Author: Công Đoàn (25/07/2022)
          */
-        setEditEmployee(empId){
+        async setEditEmployee(empId){
             var me = this;
             if(empId){
-                EmployeeApi.getEmployeeByID(empId).then((respon)=>{
+                await EmployeeApi.getEmployeeByID(empId).then((respon)=>{
                     me.employee = respon.data[0];
                     if(me.employee.departmentId){
                         CommonAPI.getByID("Departments",me.employee.departmentId).then((res)=>{
@@ -630,6 +639,9 @@ export default {
                     // Ép kiểu JSON để so sánh sư thay đổi
                     const jsonBind = JSON.stringify(me.employee)
                     me.bindEmployee = jsonBind;
+                    if(me.modeDetail == selectedMode.clone){
+                        me.getNewEmployee();
+                    }
                 }).catch((err) => {
                     console.log(err);
                 });
@@ -645,7 +657,7 @@ export default {
          */
         cloneEmployee(empId){
             this.setEditEmployee(empId);
-            this.getNewEmployee();
+            // this.getNewEmployee();
         },
 
         /**
@@ -715,15 +727,6 @@ export default {
                     this.validateComplete = false;
                 }
 
-                if(this.employee.email){
-                    if(!this.validateEmail(this.employee.email)){
-                        this.isEmptyInput.employeeEmail = false;
-                        this.validateComplete = false;
-                    }else{
-                        this.isEmptyInput.employeeEmail = true;
-                    }
-                }
-
                 if(this.employee.dateOfBirth){
                     if(!Common.validateDate(this.employee.dateOfBirth)){
                         this.isEmptyInput.employeeDateOfBirth = false;
@@ -739,58 +742,68 @@ export default {
                     }
                 }
 
+                if(this.employee.email){
+                    if(!this.validateEmail(this.employee.email)){
+                        this.isEmptyInput.employeeEmail = false;
+                        this.validateComplete = false;
+                    }else{
+                        this.isEmptyInput.employeeEmail = true;
+                    }
+                }
+
+
+
                 // HIển thị thông báo nếu có lỗi xảy ra (khi mã hoặc tên hoặc đơn vị trống)
                 // 1. Nếu employeeCode trống thì hiển thị thông báo
                 // 2. Nếu tên để trống thì hiển thị thông báo
                 // 3. Nếu departmentID trống thì hiển thị thông báo
                 // 4. Nếu Email không đúng định dạng thì hiển thị thông báo
                 if(!this.employee.employeeCode == true){
-                    this.focusEnd = "focusCode";
-                    this.resetPopupNotification();
-                    this.typePopup.danger = true;
-                    this.selectedPopup = this.iconPopup.danger;
-                    this.statusPopup = "Mã không được để trống"
-                    this.isShowPopup = true;
+                    this.showPopupDanger("focusCode",Resource.Validate_EmptyCode);
                 }else if(!this.employee.fullName == true){
-                    this.focusEnd = "focusName";
-                    this.resetPopupNotification();
-                    this.typePopup.danger = true;
-                    this.selectedPopup = this.iconPopup.danger;
-                    this.statusPopup = "Tên không được để trống"
-                    this.isShowPopup = true;
+                    this.showPopupDanger("focusName",Resource.Validate_EmptyFullName);
                 }else if(!this.employee.departmentId){
-                    this.focusEnd = "combobox";
-                    this.resetPopupNotification();
-                    this.typePopup.danger = true;
-                    this.selectedPopup = this.iconPopup.danger;
-                    this.statusPopup = "Đơn vị không được để trống"
-                    this.isShowPopup = true;
-                }else if(this.employee.email && !this.validateEmail(this.employee.email)){
-                        this.focusEnd = "focusEmail";
-                        this.resetPopupNotification();
-                        this.typePopup.danger = true;
-                        this.selectedPopup = this.iconPopup.danger;
-                        this.statusPopup = "Email không đúng định dạng"
-                        this.isShowPopup = true;
+                    this.showPopupDanger("combobox",Resource.Validate_EmptyDepartment);
                 }else if(!Common.validateDate(this.employee.dateOfBirth) && this.employee.dateOfBirth){
-                    this.focusEnd = "DateOfBirth"
-                    this.resetPopupNotification();
-                    this.typePopup.danger = true;
-                    this.selectedPopup = this.iconPopup.danger;
-                    this.statusPopup = "Ngày sinh không được lớn hơn ngày hiện tại"
-                    this.isShowPopup = true;
+                    this.showPopupDanger("DateOfBirth",Resource.Validate_DateBigger("Ngày sinh"));
                 }else if(!Common.validateDate(this.employee.identityDate) && this.employee.identityDate){
-                    this.focusEnd = "IdentityDate"
-                    this.resetPopupNotification();
-                    this.typePopup.danger = true;
-                    this.selectedPopup = this.iconPopup.danger;
-                    this.statusPopup = "Ngày cấp không được lớn hơn ngày hiện tại"
-                    this.isShowPopup = true;
+                    this.showPopupDanger("IdentityDate",Resource.Validate_DateBigger("Ngày cấp"));
+                }else if(this.employee.email && !this.validateEmail(this.employee.email)){
+                    this.showPopupDanger("focusEmail",Resource.Validate_EmailNotValid);
                 }
             }catch(err){
                 console.log(err);
             }          
         },
+
+        /**
+         * Hàm show popup cảnh báo
+         * @param {string} ref refs của ô bị lỗi 
+         * @param {string} status thông báo lỗi
+         * Author: Công Đoàn (28/07/2022)
+         */
+        showPopupDanger(ref,status){
+            this.focusEnd = ref;
+            this.resetPopupNotification();
+            this.typePopup.danger = true;
+            this.selectedPopup = this.iconPopup.danger;
+            this.statusPopup = status;
+            this.isShowPopup = true;
+        },
+
+        /**
+         * Hàm show popup hỏi
+         * Author: Công Đoàn (28/07/2022)
+         */
+        showPopupQuestion(status){
+            this.isValidateClose = false;
+            this.typePopup.question = true;
+            this.selectedPopup = this.iconPopup.question;
+            this.statusPopup = status;
+            this.isShowPopup = true;
+        },
+
+
 
         /**
          * Hàm thực hiện kiểm tra có tồn tại dữ liệu khi thực hiện event đóng form
@@ -805,20 +818,12 @@ export default {
             if(this.modeDetail == selectedMode.edit){
 
                 if( JSON.stringify(this.employee) != this.bindEmployee){
-                    this.isValidateClose = false;
-                    this.typePopup.question = true;
-                    this.selectedPopup = this.iconPopup.question;
-                    this.statusPopup = "Dữ liệu đã bị thay đổi. Bạn có muốn cất không?"
-                    this.isShowPopup = true;
+                    this.showPopupQuestion(Resource.Data_Change);
                 }
             }else if(this.employee.employeeCode||this.employee.fullName || this.employee.departmentId){
                 // 3. Kiểm tra nếu mode là add thì xem dữ liệu có rỗng không nếu không thì thông báo có muốn cất không
-                
-                this.isValidateClose = false;
-                this.typePopup.question = true;
-                this.selectedPopup = this.iconPopup.question;
-                this.statusPopup = "Dữ liệu đã bị thay đổi. Bạn có muốn cất không?"
-                this.isShowPopup = true;
+                this.showPopupQuestion(Resource.Data_Change);
+
             }
             // 4. Nếu không có data hoặc data không bị thay đổi thì đóng dialog
             if(this.isValidateClose == true){

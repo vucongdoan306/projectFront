@@ -105,7 +105,7 @@ export default {
         box-sizing: border-box;
         height: 18px;
         width: 18px;
-        border: 1px solid #767676;
+        border: 1px solid #babec5;
         border-radius: 45px;
         display: flex;
         justify-content: center;

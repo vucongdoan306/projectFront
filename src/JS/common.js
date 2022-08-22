@@ -17,16 +17,6 @@ export class Common {
      * Author: Công Đoàn (22/07/2022)
      */
     static formatDate(date){
-        // if(date != null){
-        //     date = new Date(date); //mm//dd/yyyy
-        //     let day = date.getDate();
-        //     let month = date.getMonth() +1;
-        //     let year = date.getFullYear();
-        //     return `${day}/${month}/${year}`;
-        // }else{
-        //     return "";
-        // }
-
         if (date != null) {
             date = new Date(date);
             // lấy ra ngày
@@ -40,6 +30,18 @@ export class Common {
             // Chuyển sang dạng dữ liệu ngày tháng năm
             return `${day}/${month}/${year}`;
             } else {
+            return "";
+        }
+    }
+
+    static formatYMD(date){
+        if(date != null){
+            date = new Date(date); //mm//dd/yyyy
+            let day = date.getDate();
+            let month = date.getMonth() +1;
+            let year = date.getFullYear();
+            return `${year}/${month}/${day}`;
+        }else{
             return "";
         }
     }
@@ -123,8 +125,10 @@ export class Common {
         let sentence = string.toLowerCase().split(" ");
     
         //2. Tạo vòng lặp và viết hoa chữ cái đầu tiên của các từ, cụm từ trên
-        for(var i = 0; i< sentence.length; i++){
-        sentence[i] = sentence[i][0].toUpperCase() + sentence[i].slice(1);
+        if(!string){
+            for(var i = 0; i< sentence.length; i++){
+            sentence[i] = sentence[i][0].toUpperCase() + sentence[i].slice(1);
+            }
         }
         //3. Nối các từ, cụm từ đã xử lý ở trên và trả về kết quả
         return sentence.join(" ");

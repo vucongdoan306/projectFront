@@ -141,7 +141,7 @@ export default {
                 event.target.value = Common.uppercaseFirstLetter(event.target.value);
             }
             if(this.isUpperBehindSpace){
-                event.target.value = Common.upppercaseBehindSpace(event.target.value);
+                event.target.value = Common.uppercaseFirstLetter(event.target.value);
             }
             this.$emit("update:modelValue", event.target.value);
             if( event.target.value.length >= this.maxLength){

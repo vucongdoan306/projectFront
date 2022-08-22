@@ -18,7 +18,11 @@
 </template>
 
 <script>
+import {Resource} from "../../JS/resource.js";
 export default {
+    setup(){
+        return{Resource,}
+    },
     props:{
         /**
          * Prop truyền value đầu vào
@@ -103,7 +107,7 @@ export default {
             let newDate = new Date();
             if(this.modelValue>newDate){
                 this.isNotValid = true;
-                this.titleInput = "Ngày nhập không được lớn hơn ngày hiện tại"
+                this.titleInput = Resource.Validate_DateBigger("Ngày nhập");
             }else{
                 this.isNotValid = false;
                 this.titleInput = "";

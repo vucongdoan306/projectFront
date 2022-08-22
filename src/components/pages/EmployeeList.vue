@@ -17,7 +17,7 @@
                     :textButton="'Thực hiện hàng loạt'"
                     classButton="button--outline flex--center"
                     :showIcon="true"
-                    :classIcon="'icon__down5'"
+                    :classIcon="'icon__down5-black'"
                     @click="openMultiDelete(this.isOpenMultiDelete)"
                     >
                     </base-button>
@@ -206,6 +206,7 @@ import BaseEmployeeDetail from "../base/BaseEmployeeDetail.vue";
 import BaseLoading from "../base/BaseLoading.vue";
 import axios from "axios";
 import {Common} from "../../JS/common.js";
+import {Resource} from "../../JS/resource.js";
 // import BaseToast from "../base/BaseToast.vue";
 
 import EmployeeApi from "@/APIs/EmployeeApi.js";
@@ -216,7 +217,7 @@ export default {
         this.pagingData();
     },
     setup(){
-        return {listSizePage,Common,selectedMode,deleteMode};
+        return {Resource,listSizePage,Common,selectedMode,deleteMode};
     },
     components:{
         BasePageIndex,BasePopup,BaseButton,BaseInput,BaseBoxIcon,BaseCheckbox,BaseMenuContext,BaseDropdown,BaseEmployeeDetail,BaseLoading
@@ -624,7 +625,7 @@ export default {
          */
         isDeleteEmployee(emp){
             this.deleteOption = deleteMode.single;
-            this.stausPopup = "Bạn có thực sự muốn xóa Nhân viên <" + emp.employeeCode + "> không?";
+            this.stausPopup = Resource.Delete_SingleEmployee(emp.employeeCode);
             this.idDeleteEmployee = emp.employeeId;
             this.isShowPopup = true;
         },
@@ -635,7 +636,7 @@ export default {
          */
         isDeleteMultiEmployee(){
             this.deleteOption = deleteMode.multi;
-            this.stausPopup = "Bạn có thực sự muốn xóa những nhân viên đã chọn không?";
+            this.stausPopup = Resource.Delete_MultiEmployee;
             this.isShowPopup = true;
         },
 
@@ -653,7 +654,7 @@ export default {
                     me.pagingData();
                     }, 200
                 );
-                me.openNewToast("Xóa thành công!");
+                me.openNewToast(Resource.Delete_Complete);
                 me.idDeleteEmployee ="";
             })
             .catch(function(err){
@@ -681,7 +682,7 @@ export default {
                     me.isOpenMultiDelete = false;
                     me.trSelected[me.paging.pageNumber] = [];
                     me.pagingData();
-                    me.openNewToast("Xóa thành công!");
+                    me.openNewToast(Resource.Delete_Complete);
                 }).catch(function(err){
                     console.log(err);
                 });
@@ -725,7 +726,6 @@ export default {
         async pagingData(){
             var emp = this;
             emp.isShowLoading = true;
-
             await EmployeeApi.getEmployeeFilter(emp.paging.pageSize,emp.paging.pageNumber,emp.paging.searchKey).then((respon)=>{
                 emp.employee = respon.data.data;
                 emp.paging.pageTotal = respon.data.totalPage;
