@@ -81,7 +81,7 @@
 }
 
 .content__table .table{
-    height: 680px;
+    height: calc(100vh - 261px);
 }
 
 .content__title{

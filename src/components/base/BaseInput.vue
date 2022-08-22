@@ -1,4 +1,8 @@
 <template>
+<!-- <base-toast
+ref="toast"
+>
+</base-toast> -->
 <div class="relative">
     <div class="input" :data-title="titleInput" :class="{classFather:true,'tooltip__input':titleInput}">
         <input :type="typeInput" 
@@ -13,16 +17,21 @@
         :maxlength="maxLength"
         ref="focus"     
         >
-
         <div class="icon input__icon" :class="classInputIcon" v-if="classInputIcon"></div>
     </div>
 </div>
+
 </template>
 
 <script>
+import { Common } from '@/JS/common';
+import { toast } from '../../JS/toast';
 
 export default {
     emits: ["check-empty","update:modelValue"],
+    setup(){
+        return {toast}
+    },
     props:{
 
         /**
@@ -104,17 +113,40 @@ export default {
         maxLength:{
             type: Number,
             required: false,
+        },
+        /**
+         * Prop xác định chuỗi nhập vào có viết hoa chữ đầu không
+         */
+        isUppercaseFirst:{
+            type: Boolean,
+            default: false,
+            required: false,
+        },
+        /**
+         * Prop xác định chuỗi nhập vào có viết hoa sau dấu cách không
+         */
+        isUpperBehindSpace:{
+            type: Boolean,
+            default: false,
+            required: false,
         }
-
-
     },
     methods: {
         /**
-         * Hàm thực hiện binding 2 chiều update lại data trong input
+         * Hàm thực hiện binding 2 chiều update lại data trong input và kiểm tra số lượng kí tự cho phép
          * Author: Công Đoàn (25/07/2022)
          */
         updateInput(event) {
+            if(event.target.value.length == 1 && this.isUppercaseFirst){
+                event.target.value = Common.uppercaseFirstLetter(event.target.value);
+            }
+            if(this.isUpperBehindSpace){
+                event.target.value = Common.upppercaseBehindSpace(event.target.value);
+            }
             this.$emit("update:modelValue", event.target.value);
+            if( event.target.value.length >= this.maxLength){
+                toast({message: "Bạn đã nhập hết số kí tự cho phép",type: "error",duration: 2000})
+            }
         },
 
         /**
@@ -123,7 +155,6 @@ export default {
          */
         checkEmpty(){ 
             this.$emit('check-empty');
-
         },
         /**
          * Hàm focus vào ô input

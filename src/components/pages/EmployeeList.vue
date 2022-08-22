@@ -206,7 +206,7 @@ import BaseEmployeeDetail from "../base/BaseEmployeeDetail.vue";
 import BaseLoading from "../base/BaseLoading.vue";
 import axios from "axios";
 import {Common} from "../../JS/common.js";
-import BaseToast from "../base/BaseToast.vue";
+// import BaseToast from "../base/BaseToast.vue";
 
 import EmployeeApi from "@/APIs/EmployeeApi.js";
 
@@ -219,7 +219,7 @@ export default {
         return {listSizePage,Common,selectedMode,deleteMode};
     },
     components:{
-        BaseToast,BasePageIndex,BasePopup,BaseButton,BaseInput,BaseBoxIcon,BaseCheckbox,BaseMenuContext,BaseDropdown,BaseEmployeeDetail,BaseLoading
+        BasePageIndex,BasePopup,BaseButton,BaseInput,BaseBoxIcon,BaseCheckbox,BaseMenuContext,BaseDropdown,BaseEmployeeDetail,BaseLoading
     },
     watch:{
 
@@ -693,7 +693,6 @@ export default {
 
         deleteEmployee(){
             if(this.deleteOption == deleteMode.single){
-                console.log(this.idDeleteEmployee);
                 this.deleteSingleEmployee();
             }else{
                 this.deleteMulti();

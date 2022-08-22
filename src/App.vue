@@ -2,6 +2,7 @@
   <the-nav :isCloseNav="isCloseNavigation"  @is-opennav="toggleNav"></the-nav>
   <the-header :isCloseNav="isCloseNavigation" @is-closenav="toggleNav"></the-header>
   <the-content :isCloseNav="isCloseNavigation"></the-content>
+  <base-toast></base-toast>
 </template>
 
 <script>

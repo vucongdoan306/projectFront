@@ -40,8 +40,13 @@
 
 <script>
 // import CommonAPI from "../../APIs/CommonApi.js";
-
+import {Common} from "../../JS/common";
 export default {
+    setup(){
+        return {
+            Common,
+        }
+    },
     props:{
 
         /**
@@ -234,7 +239,7 @@ export default {
         filterInputChange(){
             var me = this;
             this.dataFilter = this.data.filter(e=>{
-                return e[me.nameData].includes(me.textName);
+                return Common.removeAccent(e[me.nameData].toLowerCase()).includes(Common.removeAccent(me.textName.toLowerCase()));
             })
             this.maxIndex = this.dataFilter.length;
             this.iSelecting = 0;

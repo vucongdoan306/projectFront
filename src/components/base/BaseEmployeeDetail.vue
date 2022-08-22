@@ -38,7 +38,6 @@
                         <div class="flex">
                             <div class="w--40 popup__row pdr--6">
                                 <label for="">Mã <span>*</span></label>
-
                                 <base-input
                                 :tabIndex="1"
                                 ref="focusCode"
@@ -52,12 +51,10 @@
                                 @keydown.tab="preFocus($event)"
                                 :maxLength="maxLength.code"
                                 ></base-input>
-
                             </div>
 
                             <div class="w--60 popup__row">
                                 <label for="">Tên <span>*</span></label>
-
                                 <base-input
                                 :tabIndex="2"
                                 ref="focusName"
@@ -66,13 +63,11 @@
                                 :idInput="'txtFullName'"
                                 v-model="this.employee.fullName"
                                 @check-empty="this.isEmptyInput.employeeFullName = validateBlurInput(this.employee.fullName)"
-                                :classInput="{'border--error' : this.isEmptyInput.employeeFullName,'text--capitalize':true}"
+                                :classInput="{'border--error' : this.isEmptyInput.employeeFullName}"
                                 :titleInput="this.isEmptyInput.employeeFullName ? 'Thông tin không được để trống':''"
                                 :maxLength="maxLength.fullname"
+                                :isUpperBehindSpace="true"
                                 ></base-input>
-
-
-
                             </div>
                         </div>
 
@@ -89,13 +84,11 @@
                             ref="combobox"
                             :mainData="this.department"
                             :bindingData="this.departmentSelected"
-                            />
-                            
+                            />    
                         </div>
 
                         <div class="w--full popup__row">
                             <label for="">Chức danh</label>
-
                             <base-input
                                 :typeInput="'text'"
                                 :placeholderInput="''"
@@ -103,8 +96,8 @@
                                 v-model="employee.positionName"
                                 :tabIndex="4"
                                 :maxLength="maxLength.default"
+                                :isUppercaseFirst="true"
                             ></base-input>
-
                         </div>
                     </div>
 
@@ -124,7 +117,6 @@
                                 ref="DateOfBirth"
                                 >
                                 </base-datetime>
-
                             </div>
 
                             <div class="w--60 popup__row pdl--10">
@@ -146,12 +138,12 @@
                             <div class="w--60 popup__row pdr--6">
                                 <label for="" title="Số chứng minh thư nhân dân">Số CMND</label>
                                 <base-input
-                                    :typeInput="'text'"
-                                    :placeholderInput="''"
-                                    :idInput="'txtIdentityNumber'"
-                                    v-model="employee.identityNumber"
-                                    :tabIndex="9"
-                                    :maxLength="maxLength.identity"
+                                :typeInput="'text'"
+                                :placeholderInput="''"
+                                :idInput="'txtIdentityNumber'"
+                                v-model="employee.identityNumber"
+                                :tabIndex="9"
+                                :maxLength="maxLength.identity"
                                 ></base-input>
                             </div>
 
@@ -175,13 +167,13 @@
                         <div class="w--full popup__row">
                             <label for="">Nơi cấp</label>
                             <base-input
-                                :typeInput="'text'"
-                                :placeholderInput="''"
-                                :idInput="''"
-                                v-model="employee.identityPlace"
-                                :tabIndex="11"
-                                :classInput="'text--capitalize'"
-                                :maxLength="maxLength.default"
+                            :typeInput="'text'"
+                            :placeholderInput="''"
+                            :idInput="''"
+                            v-model="employee.identityPlace"
+                            :tabIndex="11"
+                            :maxLength="maxLength.default"
+                            :isUppercaseFirst="true"
                             ></base-input>
                         </div>
                     </div>
@@ -193,13 +185,13 @@
                     <div class="w--full  popup__row">
                         <label for="">Địa chỉ</label>
                         <base-input
-                            :typeInput="'text'"
-                            :placeholderInput="''"
-                            :idInput="''"
-                            v-model="employee.address"
-                            :tabIndex="12"
-                            :classInput="'text--capitalize'"
-                            :maxLength="maxLength.default"
+                        :typeInput="'text'"
+                        :placeholderInput="''"
+                        :idInput="''"
+                        v-model="employee.address"
+                        :tabIndex="12"
+                        :maxLength="maxLength.default"
+                        :isUppercaseFirst="true"
                         ></base-input>
                     </div>
 
@@ -207,38 +199,38 @@
                         <div class="w--25 popup__row pdr--6">
                             <label for="">ĐT di động</label>
                             <base-input
-                                :typeInput="'text'"
-                                :placeholderInput="''"
-                                :idInput="''"
-                                v-model="employee.phoneNumber"
-                                :tabIndex="13"
-                                :maxLength="maxLength.phone"
+                            :typeInput="'text'"
+                            :placeholderInput="''"
+                            :idInput="''"
+                            v-model="employee.phoneNumber"
+                            :tabIndex="13"
+                            :maxLength="maxLength.phone"
                             ></base-input>
                         </div>
                         <div class="w--25 popup__row pdr--6">
                             <label for="">ĐT cố định</label>
                             <base-input
-                                :typeInput="'text'"
-                                :placeholderInput="''"
-                                :idInput="''"
-                                :tabIndex="14"
-                                v-model="employee.telephoneFax"
-                                :maxLength="maxLength.phone"
+                            :typeInput="'text'"
+                            :placeholderInput="''"
+                            :idInput="''"
+                            :tabIndex="14"
+                            v-model="employee.telephoneFax"
+                            :maxLength="maxLength.phone"
                             ></base-input>
                         </div>
                         <div class="w--25 popup__row">
                             <label for="">Email</label>
                             <base-input
-                                :typeInput="'text'"
-                                :placeholderInput="''"
-                                :idInput="''"
-                                v-model="employee.email"
-                                @check-empty="validateEmailBlur()"
-                                ref="focusEmail"
-                                :classInput="{'border--error' : !this.isEmptyInput.employeeEmail}"
-                                :titleInput="!this.isEmptyInput.employeeEmail ? 'Email không đúng định dạng':''"
-                                :tabIndex="15"
-                                :maxLength="maxLength.email"
+                            :typeInput="'text'"
+                            :placeholderInput="''"
+                            :idInput="''"
+                            v-model="employee.email"
+                            @check-empty="validateEmailBlur()"
+                            ref="focusEmail"
+                            :classInput="{'border--error' : !this.isEmptyInput.employeeEmail}"
+                            :titleInput="!this.isEmptyInput.employeeEmail ? 'Email không đúng định dạng':''"
+                            :tabIndex="15"
+                            :maxLength="maxLength.email"
                             ></base-input>
                         </div>
                     </div>
@@ -247,43 +239,41 @@
                         <div class="w--25 popup__row pdr--6">
                             <label for="">Tài khoản ngân hàng</label>
                             <base-input
-                                :typeInput="'text'"
-                                :placeholderInput="''"
-                                v-model="employee.bankAccount"
-                                :idInput="''"
-                                :tabIndex="16"
-                                :maxLength="maxLength.default"
+                            :typeInput="'text'"
+                            :placeholderInput="''"
+                            v-model="employee.bankAccount"
+                            :idInput="''"
+                            :tabIndex="16"
+                            :maxLength="maxLength.default"
                             ></base-input>
                         </div>
                         <div class="w--25 popup__row pdr--6">
                             <label for="">Tên ngân hàng</label>
                             <base-input
-                                :typeInput="'text'"
-                                :placeholderInput="''"
-                                :idInput="''"
-                                v-model="employee.bankName"
-                                :tabIndex="17"
-                                :maxLength="maxLength.default"
+                            :typeInput="'text'"
+                            :placeholderInput="''"
+                            :idInput="''"
+                            v-model="employee.bankName"
+                            :tabIndex="17"
+                            :maxLength="maxLength.default"
                             ></base-input>
                         </div>
                         <div class="w--25 popup__row">
                             <label for="">Chi nhánh</label>
                             <base-input
-                                :typeInput="'text'"
-                                :placeholderInput="''"
-                                :idInput="''"
-                                v-model="employee.bankBranch"
-                                :tabIndex="18"
-                                :maxLength="maxLength.default"
+                            :typeInput="'text'"
+                            :placeholderInput="''"
+                            :idInput="''"
+                            v-model="employee.bankBranch"
+                            :tabIndex="18"
+                            :maxLength="maxLength.default"
                             ></base-input>
                         </div>
                     </div>
-
                 </div>
 
                 <!-- Content Line ngăn cách -->
                 <div class="popup__line"></div>
-
 
                 <!-- Content footer -->
                 <div class="popup__footer">
@@ -629,7 +619,6 @@ export default {
             var me = this;
             if(empId){
                 EmployeeApi.getEmployeeByID(empId).then((respon)=>{
-                    console.log(respon.data[0]);
                     me.employee = respon.data[0];
                     if(me.employee.departmentId){
                         CommonAPI.getByID("Departments",me.employee.departmentId).then((res)=>{

@@ -20,8 +20,6 @@ const routers = [
     {path: "/test12", component: TestVue},
     {path: "/test13", component: TestVue},
     {path: "/test14", component: TestVue},
-
-
 ]
 
 
