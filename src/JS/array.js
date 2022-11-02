@@ -3,21 +3,9 @@
  * Object lưu class routter và text của MenuITem
  */
 export const listItemNav = [
-    {classIcon:'icon__overview', text:'Tổng quan', routerItem:'/employees'},
-    {classIcon:'icon__cash', text:'Tiền mặt', routerItem:'/test1'},
-    {classIcon:'icon__deposits', text:'Tiền gửi',routerItem:'/test2'},
-    {classIcon:'icon__purchase', text:'Mua hàng',routerItem:'/test3'},
-    {classIcon:'icon__sell', text:'Bán hàng',routerItem:'/test4'},
-    {classIcon:'icon__invoice', text:'Quản lý hóa đơn',routerItem:'/test5'},
-    {classIcon:'icon__bunker', text:'Kho',routerItem:'/test6'},
-    {classIcon:'icon__tool', text:'Công cụ dụng cụ',routerItem:'/test7'},
-    {classIcon:'icon__asset', text:'Tài sản cố định',routerItem:'/test8'},
-    {classIcon:'icon__tax', text:'Thuế',routerItem:'/test9'},
-    {classIcon:'icon__price', text:'Giá thành',routerItem:'/test10'},
-    {classIcon:'icon__synthetic', text:'Tổng hợp',routerItem:'/test11'},
-    {classIcon:'icon__budget', text:'Ngân sách',routerItem:'/test12'},
-    {classIcon:'icon__report', text:'Báo cáo',routerItem:'/test13'},
-    {classIcon:'icon__analysis', text:'Phân tích tài chính',routerItem:'/test14'},
+    {classIcon:'icon__overview', text:'Nhân viên', routerItem:'/employees'},
+    {classIcon:'icon__cash', text:'Lương', routerItem:'/test1'},
+    {classIcon:'icon__invoice', text:'Tài khoản',routerItem:'/test5'},
 ]
 
 /**

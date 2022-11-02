@@ -11,7 +11,10 @@
 }
 
 .content__main{
+    border-radius: 10px;
     background-color: #ffffff;
+    background-image: url(../../assets/img/4565.jpg);
+    background-size: auto;
 }
 
 .content__feature{
@@ -52,6 +55,7 @@
     margin-right: 10px;
     padding-left: 8px;
     box-sizing: border-box;
+    border-radius: 4px;
 }
 
 
@@ -69,6 +73,8 @@
     font-family: AMIS Fonts;
     font-size: 13px;
     cursor: pointer;
+    border-radius: 4px;
+    background-color: transparent;
 }
 
 .page--selected{
@@ -81,6 +87,7 @@
 }
 
 .content__table .table{
+    border-radius: 4px;
     height: calc(100vh - 261px);
 }
 

@@ -25,6 +25,7 @@ ref="toast"
 
 <script>
 import { Common } from '@/JS/common';
+import { Resource } from '@/JS/resource';
 import { toast } from '../../JS/toast';
 
 export default {
@@ -114,6 +115,7 @@ export default {
             type: Number,
             required: false,
         },
+        
         /**
          * Prop xác định chuỗi nhập vào có viết hoa chữ đầu không
          */
@@ -122,6 +124,7 @@ export default {
             default: false,
             required: false,
         },
+
         /**
          * Prop xác định chuỗi nhập vào có viết hoa sau dấu cách không
          */
@@ -145,7 +148,7 @@ export default {
             }
             this.$emit("update:modelValue", event.target.value);
             if( event.target.value.length >= this.maxLength){
-                toast({message: "Bạn đã nhập hết số kí tự cho phép",type: "error",duration: 2000})
+                toast({message: Resource.Validate_LengthInputLimit,type: "error",duration: 2000})
             }
         },
 
@@ -156,6 +159,7 @@ export default {
         checkEmpty(){ 
             this.$emit('check-empty');
         },
+
         /**
          * Hàm focus vào ô input
          * Author: Công Đoàn (25/07/2022)

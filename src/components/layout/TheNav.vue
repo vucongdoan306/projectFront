@@ -1,12 +1,17 @@
 <template>
     <div class="navigation__left" :style="{width: isCloseNav ? '52px': '178px'}">
         <div class="navigation__header">
-            <div class="navigation__icon brn--5" :class="{'pdr--10':!isCloseNav}">
-                <div class="icon" :class="{'icon__toggle--header': isCloseNav, 'icon__toggle': !isCloseNav}" @click="openNav(isCloseNav)"></div>
+            <div class="brn--5" :class="{'navigation__icon':isCloseNav}">
+                <div class="icon" :class="{'icon__toggle--header': isCloseNav, 'dp--none': !isCloseNav}" @click="openNav(isCloseNav)"></div>
             </div>
             <div class="navigation__logo">
-                <img src="../../assets/img/Logo_Module_TiengViet_White.66947422.svg"
-                    class="logo" :class="{'dp--none':isCloseNav}">
+                <!-- <img src="../../assets/img/Logo_Module_TiengViet_White.66947422.svg"
+                    class="logo" :class="{'dp--none':isCloseNav}"/> -->
+                <div class="box-icon-header" :class="{'dp--none':isCloseNav}">
+                    <div class="icon-header"></div>
+                    <div>QLNS</div>
+                </div>
+                
             </div>
         </div>
         <div class="navigation__menu">

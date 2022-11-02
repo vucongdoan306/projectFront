@@ -9,17 +9,6 @@
             <div class="popup__header">
                 <div class="popup__label">
                     <div class="popup__title">Thông tin nhân viên</div>
-                    <div class="checkbox__container">
-                        <base-checkbox
-                        ></base-checkbox>
-                        <span>Là khách hàng</span>
-                    </div>
-
-                    <div class="checkbox__container">
-                        <base-checkbox></base-checkbox>
-                        <span>Là nhà cung cấp</span>
-                    </div>
-                    
                 </div>
 
                 <div class="popup__close">
@@ -286,17 +275,17 @@
                     <div class="footer__right">
                         <base-button
                         :classButton="'mgr--8 button--white pd--6-16'"
-                        :textButton="'Cất'"
-                        :titleButton="'Cất (Ctrl + S)'"
+                        :textButton="'Lưu'"
+                        :titleButton="'Lưu (Ctrl + S)'"
                         @click="btnSaveEmployee(this.modeSave.close)"
                         :tabIndex="19"
                         ></base-button>
 
                         <base-button
                         :classButton="'pd--6-16 button--red'"
-                        :textButton="'Cất và Thêm'"
+                        :textButton="'Lưu và Thêm'"
                         @click="btnSaveEmployee(this.modeSave.add)"
-                        :titleButton="'Cất và thêm'"
+                        :titleButton="'Lưu và thêm'"
                         :tabIndex="20"
                         ></base-button>
 
@@ -334,7 +323,6 @@
 
 <script>
 import BaseCombox from "./BaseCombox.vue";
-import BaseCheckbox from "./BaseCheckbox.vue";
 import BaseBoxIcon from "./BaseBoxIcon.vue";
 import BaseInput from "./BaseInput.vue";
 import BaseButton from "../base/BaseButton.vue";
@@ -356,7 +344,7 @@ export default {
         return {Resource,typeGender,Common,selectedMode,maxLength};
     },
     components:{
-        BaseDatetime,BaseCheckbox,BaseBoxIcon,BaseInput,BaseButton,BasePopup,BaseCombox,BaseRadio,
+        BaseDatetime,BaseBoxIcon,BaseInput,BaseButton,BasePopup,BaseCombox,BaseRadio,
     },
     async created() {
         var me = this;
@@ -466,7 +454,7 @@ export default {
         },
 
         /**
-         * Hàm thực hiện cất hoặc thêm mới nhân viên khi theo chế độ add hoặc edit
+         * Hàm thực hiện Lưu hoặc thêm mới nhân viên khi theo chế độ add hoặc edit
          * @param {number} mode biến xác định chế độ lưu
          * Author: Công Đoàn (22/07/2022)
          */
@@ -483,16 +471,16 @@ export default {
                     this.employee.identityDate = Common.formatYMD(
                     this.employee.identityDate
                 );
-                // 2. Nếu không có lỗi thì thực hiện cất hoặc thêm mới theo chế được
+                // 2. Nếu không có lỗi thì thực hiện Lưu hoặc thêm mới theo chế được
                 if(me.validateComplete == true){
                     // Thực hiện thêm mới nếu ở chế độ thêm
                     if(me.modeDetail == selectedMode.add || me.modeDetail == selectedMode.clone){
                         EmployeeApi.saveEmployee(me.employee).then(function(){
-                                 // Đóng form nếu chọn cất
+                                 // Đóng form nếu chọn Lưu
                             if(mode==me.modeSave.close){
                                 me.closeThisDialog(true);
                             }else{
-                                // Giữ lại form nếu chọn cất và thêm mới
+                                // Giữ lại form nếu chọn Lưu và thêm mới
                                 me.resetDetail();
                                 me.$emit('re-mode-add');
                             }
@@ -699,7 +687,7 @@ export default {
 
 
         /**
-         * Hàm validate tất cả sau khi thực hiện cất
+         * Hàm validate tất cả sau khi thực hiện Lưu
          * Author: Công Đoàn (25/07/2022)
          */
 
@@ -814,14 +802,14 @@ export default {
             // 1.Set giá trị validate close là true mặc định
             this.isValidateClose = true;
 
-            // 2.Nếu mode là edit thì kiểm tra xem dữ liệu có khác với dữ liệu ban đầu được bind lên form không nếu khác thì thông báo có muốn cất không 
+            // 2.Nếu mode là edit thì kiểm tra xem dữ liệu có khác với dữ liệu ban đầu được bind lên form không nếu khác thì thông báo có muốn Lưu không 
             if(this.modeDetail == selectedMode.edit){
 
                 if( JSON.stringify(this.employee) != this.bindEmployee){
                     this.showPopupQuestion(Resource.Data_Change);
                 }
             }else if(this.employee.employeeCode||this.employee.fullName || this.employee.departmentId){
-                // 3. Kiểm tra nếu mode là add thì xem dữ liệu có rỗng không nếu không thì thông báo có muốn cất không
+                // 3. Kiểm tra nếu mode là add thì xem dữ liệu có rỗng không nếu không thì thông báo có muốn Lưu không
                 this.showPopupQuestion(Resource.Data_Change);
 
             }
@@ -890,6 +878,7 @@ export default {
         /**
          * Hàm thực hiện validate date
          * @param {date} date biến lưu giá trị ngày tháng của employee
+         * @returns Giá trị đúng sai khi validate ngày đúng định dạng
          * Author: Công Đoàn (14/08/2022)
          */
 
@@ -994,7 +983,7 @@ export default {
             },
 
             /**
-             * Object lựa chọn cất hoặc cất và thêm
+             * Object lựa chọn Lưu hoặc Lưu và thêm
              */
             modeSave:{
                 close: 1,
@@ -1002,7 +991,7 @@ export default {
             },
 
             /**
-             * Biến lưu sự lựa chọn cất hoặc cất và thêm
+             * Biến lưu sự lựa chọn Lưu hoặc Lưu và thêm
              */
             modeSaveSelected: 1,
 

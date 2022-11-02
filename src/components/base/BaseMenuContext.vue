@@ -2,7 +2,6 @@
     <div class="dropdown__data column__data">
         <div class="dropdown__item" @click="cloneEmployee()">Nhân bản</div>
         <div class="dropdown__item delete__emp" @click="deleteEmployee()">Xóa</div>
-        <div class="dropdown__item">Ngừng sử dụng</div>
     </div>
 </template>
 
@@ -24,7 +23,7 @@ export default {
          */
         cloneEmployee(){
             this.$emit('clone-employee');
-        }
+        },
     }
 }
 </script>

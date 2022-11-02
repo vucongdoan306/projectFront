@@ -6,6 +6,7 @@
     font-size: 13px;
     height: 100vh;
     z-index: 15;
+    background-image: url(../../assets/img/ee20d23db8e79bb70d61abca731fa3a2.jpg);
 }
 
 .navigation__header{
@@ -30,6 +31,7 @@
     padding: 0 14px 0 8px;
     border-left: 6px solid transparent;
     cursor: pointer;
+    border-radius: 4px;
 }
 
 .navigation__item:hover{

@@ -25,6 +25,11 @@ export class Resource{
     static Data_Change = "Dữ liệu đã bị thay đổi. Bạn có muốn cất không?";
 
     /**
+     * Status thông báo đã nhập đến kí tự cuối của input
+     */
+    static Validate_LengthInputLimit = "Bạn đã nhập hết số kí tự cho phép";
+    
+    /**
      * Status thông báo ngày nhập không được lớn hơn ngày hiện tại
      * @param {string} str Trường bị lỗi
      */

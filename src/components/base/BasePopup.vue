@@ -118,5 +118,7 @@ export default {
 </script>
 
 <style lang="css">
-    
+    .btnNoKeep{
+        background-color: #FF7777;
+    }
 </style>

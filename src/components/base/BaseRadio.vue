@@ -113,14 +113,14 @@ export default {
     }
 
     .radio__item:focus-visible{
-        outline: 1px solid #2CA01C;
+        outline: 1px solid #3639d1;
     }
 
     .radio__item--checked{
         height: 12px;
         width: 12px;
         border-radius: 45px;
-        background-color: #2CA01C;
+        background-color: #3639d1;
     }
 
     .radio__item__gender{

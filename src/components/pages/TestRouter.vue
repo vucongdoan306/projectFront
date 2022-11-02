@@ -1,50 +1,18 @@
 <template>
-    <button @click="Open">một</button>
-    <div>
-
-      <base-test v-if="isOpen"
-      :mainData="this.data"
-      :nameData="'DepartmentName'"
-      :idData="'DepartmentId'"
-      :codeData="'DepartmentCode'"
-      >
-      
-      </base-test>
-
-    </div>
+  <div class="destructing">Chức năng đang thi công!!</div>
 </template>
 
 <script>
-
-import BaseTest from "../base/BaseTest.vue";
-import CommonAPI from "../../APIs/CommonApi.js";
-export default {
-  components:{
-    BaseTest,
-  },
-  created() {
-    var me = this;
-    CommonAPI.getAll("Departments").then((respon)=>{
-      me.data = respon.data;
-      console.log(me.data);
-    })
-  },
-  data(){
-    return{
-      data: [],
-      isOpen: false,
-    }
-
-  },
-  methods:{
-    Open(){
-      this.isOpen = !this.isOpen;
-    }
-  }
-  
-}
+export default {};
 </script>
 
-<style lang="css">
-    
+<style lang="css" scoped>
+.destructing{
+  height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  font-weight: 700;
+}
 </style>

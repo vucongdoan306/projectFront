@@ -12,6 +12,7 @@
     box-sizing: border-box;
     font-size: 13px;
     cursor: pointer;
+    background: transparent;
 }
 
 .dropdown__input:focus{
@@ -23,6 +24,7 @@
 }
 
 .dropdown__data{
+    border-radius: 4px;
     background-color: #fff;
     /* display: none; */
     margin-top: 10px;
@@ -64,12 +66,12 @@
 }
 
 .dropdown__item--footer:hover{
-    color: #2CA01C;
+    color: #3639d1;
 }
 
 .dropdown__item--selected{
     color: #fff;
-    background-color: #2ca01c;
+    background-color: #3639d1;
 }
 
 .dropdown__hover:hover{
