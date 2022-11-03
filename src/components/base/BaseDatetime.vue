@@ -99,7 +99,7 @@ export default {
     methods:{
         /**
          * Thực hiện truyền dữ liệu thay đổi khi dữ liệu bị thay đổi
-         * Author: Công Đoàn (18/08/2022)
+         * Author: Công Đoàn
          */
         updateData(){
             this.$emit("bind-value",this.modelValue);
@@ -116,7 +116,7 @@ export default {
 
         /**
          * Hàm set focus tại input date
-         * Author: Công Đoàn (18/08/2022)
+         * Author: Công Đoàn
          */
         setFocus(){
             this.$refs.inputDate.focus();

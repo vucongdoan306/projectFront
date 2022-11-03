@@ -68,7 +68,7 @@ export default {
 
         /**
          * hàm thực hiện binding 2 chiều update lại data trong input
-         * Author: Công Đoàn (25/07/2022)
+         * Author: Công Đoàn
          */
         updateInput(event) {
             this.$emit("update:modelValue", event.target.value);
@@ -76,7 +76,7 @@ export default {
 
         /**
          * Hàm đóng mở combobox data
-         * Author: Công Đoàn (20/07/2022)
+         * Author: Công Đoàn
          */
         toggleCombobox(){
             this.isShowCombobox = !this.isShowCombobox;
@@ -84,7 +84,7 @@ export default {
 
         /**
          * Hàm chọn data trong combobox data
-         * Author: Công Đoàn (20/07/2022)
+         * Author: Công Đoàn
          */
         selectedItem(data){
             this.toggleCombobox();
@@ -93,7 +93,7 @@ export default {
 
         /**
          * Hàm thực hiện validate rỗng trong combobox input
-         * Author: Công Đoàn (20/07/2022)
+         * Author: Công Đoàn
          */
         validateInput(data){
             if(!data){

@@ -44,7 +44,7 @@ export default {
         /**
          * Hàm thực hiện mở nav
          * @param {boolean} val biến điều kiện thu gọn navigation
-         * Author: Công Đoàn (15/07/2022)
+         * Author: Công Đoàn
          */
         openNav(val){
             this.$emit('is-opennav',val);

@@ -12,7 +12,7 @@
           /**
            * Hàm thực hiện toast message thành công
            * @param {string} status status của hộp thoại thông báo
-           * Author: Công Đoàn (01/08/2022)
+           * Author: Công Đoàn
            */
             showSuccessToast(status) {
                 toast({
@@ -24,7 +24,7 @@
           /**
            * Hàm thực hiện toast message thất bại
            * @param {string} status status của hộp thoại thông báo
-           * Author: Công Đoàn (01/08/2022)
+           * Author: Công Đoàn
            */
             showErrorToast(status) {
                 toast({

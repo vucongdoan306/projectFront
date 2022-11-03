@@ -98,7 +98,7 @@ export default {
         /**
          * Hàm thực hiện đóng mở dropdown data
          * @param {boolean} isShow biến xác định đóng mở dropdown
-         * Author: Công Đoàn (20/07/2022)
+         * Author: Công Đoàn 
          */
         isShowData(isShow){
             this.Open = isShow;
@@ -107,7 +107,7 @@ export default {
         /**
          * Hàm đánh dâu item data được chọn
          * @param {string, number, object} value lưu giá trị đang được chọn trong dropdown
-         * Author: Công Đoàn (20/07/2022)
+         * Author: Công Đoàn 
          */
         checkClick(value){
             if(value==this.selectedDropdown){
@@ -118,7 +118,7 @@ export default {
 
         /**
          * Hàm chuyển data được chọn lên phân trang
-         * Author: Công Đoàn (20/07/2022)
+         * Author: Công Đoàn 
          */
         isSelectedData(value){
             this.$emit('select-data',value);

@@ -75,7 +75,7 @@ export default {
   methods: {
     /**
      * Hàm thực hiện đóng mở Nav
-     * Author: Công Đoàn (15/07/2022)
+     * Author: Công Đoàn
      */
     closeNav(isClose) {
       this.$emit("is-closenav", isClose);

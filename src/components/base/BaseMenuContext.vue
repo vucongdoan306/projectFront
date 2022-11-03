@@ -11,7 +11,7 @@ export default {
     methods:{
         /**
          * Hàm gọi đến hàm xóa employee
-         * Author: Công Đoàn (25/07/2022)
+         * Author: Công Đoàn 
          */
         deleteEmployee(){
             this.$emit('delete-employee');
@@ -19,7 +19,7 @@ export default {
 
         /**
          * Hàm thực hiện nhân bản employee
-         * Author: Công Đoàn (14/08/2022)
+         * Author: Công Đoàn 
          */
         cloneEmployee(){
             this.$emit('clone-employee');
