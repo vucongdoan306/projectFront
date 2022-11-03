@@ -406,7 +406,7 @@ export default {
   methods: {
     /**
      * Hàm thực hiện mở EmployeeDetail
-     * AUthor: Công Đoàn (22/07/2022)
+     * AUthor: Công Đoàn
      */
     openEmployeeDetail(value) {
       this.isOpenEmpDetail = true;
@@ -416,7 +416,7 @@ export default {
 
     /**
      * Hàm thực hiện clone Employee
-     * Author: Công Đoàn (14/08/2022)
+     * Author: Công Đoàn
      */
     cloneEmployee(emp) {
       this.isOpenEmpDetail = true;
@@ -426,7 +426,7 @@ export default {
 
     /**
      * Hàm thực hiện mở lại Employee Detail
-     * Author: Công Đoàn (02/08/2022)
+     * Author: Công Đoàn
      */
 
     reOpen() {
@@ -436,11 +436,11 @@ export default {
         this.pagingData();
         this.openEmployeeAdd();
       }, 200);
-    },
+    }, 
 
     /**
      * Hàm thực hiện đóng mở context menu
-     * Author: Vũ Công Đoàn (22/07/2022)
+     * Author: Vũ Công Đoàn
      */
     toggleFeature(data) {
       if (this.contextMenuSelected == data) {
@@ -452,7 +452,7 @@ export default {
 
     /**
      * Hàm thực hiện kiểm tra context menu đang đóng hay mở
-     * Author: Công Đoàn (22/07/2022)
+     * Author: Công Đoàn
      */
     checkToggle(data) {
       if (this.contextMenuSelected == data) {
@@ -464,7 +464,7 @@ export default {
 
     /**
      * Hàm thực hiện mở form thêm mới
-     * Author: Công Đoàn (25/07/2022)
+     * Author: Công Đoàn
      */
     openEmployeeAdd() {
       this.isOpenEmpDetail = !this.isOpenEmpDetail;
@@ -473,7 +473,7 @@ export default {
 
     /**
      * Hàm đóng form thêm mới
-     * Author: Công Đoàn (25/07/2022)
+     * Author: Công Đoàn
      */
     closeEmployeeAdd() {
       this.isOpenEmpDetail = !this.isOpenEmpDetail;
@@ -481,7 +481,7 @@ export default {
 
     /**
      * Hàm load lại toàn bộ data
-     * Author: Công Đoàn (25/07/2022)
+     * Author: Công Đoàn
      */
     loadData() {
       var emp = this;
@@ -502,7 +502,7 @@ export default {
     /**
      * Hàm thực hiện xác định hàng đang được chọn
      * @param {string} data id của nhân viên đang được chọn
-     * Author: Công Đoàn (25/07/2022)
+     * Author: Công Đoàn
      */
     selectingTr(data) {
       if (this.trSelecting == data) {
@@ -515,7 +515,7 @@ export default {
     /**
      * Hàm thực hiện chọn hàng đang được chọn hoặc bỏ chọn
      * @param {string} data id của nhân viên đang được chọn
-     * Author: Công Đoàn (25/07/2022)
+     * Author: Công Đoàn
      */
     checkSelectingTr(data) {
       if (this.trSelecting == data) {
@@ -529,7 +529,7 @@ export default {
      * Hàm thực hiện nạp id data vào mảng 1 chiều
      * @param {number} index chỉ số của mảng 2 chiều đang được chọn
      * @param {string} employeeId id của nhân viên đang được chọn
-     * Author: Công Đoàn (16/08/2022)
+     * Author: Công Đoàn
      */
     selectedSingleTr(index, employeeId) {
       index = index + (this.paging.pageNumber - 1) * this.paging.pageSize;
@@ -540,7 +540,7 @@ export default {
      * Hàm thực hiện nap tất cả id data vào mảng 1 chiều
      * @param {number} index chỉ số của mảng 2 chiều đang được chọn
      * @param {string} data mảng id của nahan viên đang được chọn
-     * Author: Công Đoàn (17/08/2022)
+     * Author: Công Đoàn
      */
     selectedAllSingeTr(index, data) {
       let i = (index - 1) * this.paging.pageSize;
@@ -568,7 +568,7 @@ export default {
 
     /**
      * Hàm thực hiện convert 1 chiều thành 2 chiều
-     * Author: Công Đoàn (16/08/2022)
+     * Author: Công Đoàn
      */
     convertArraySingleToDouble() {
       let arrayLength = this.singleTrSelected.length;
@@ -588,7 +588,7 @@ export default {
     /**
      * Hàm thực hiện xác định các hàng đang được chon
      * @param {string} EmployeeId id của nhân viên đang được chọn
-     * Author: Công Đoàn (25/07/2022)
+     * Author: Công Đoàn
      */
     selectedTr(EmployeeId) {
       let index = this.paging.pageNumber; // trang 1 là trang đang được chọn
@@ -614,7 +614,7 @@ export default {
     /**
      * Hàm thực hiện chọn hoặc bỏ chọn các hàng đang được chọn
      * @param {string} EmployeeId id của nhân viên đang được chọn
-     * Author: Công Đoàn (25/07/2022)
+     * Author: Công Đoàn
      */
     checkSelectedTr(EmployeeId) {
       let index = this.paging.pageNumber;
@@ -632,7 +632,7 @@ export default {
 
     /**
      * Hàm thực hiện chọn tất cả nhân viên trong bảng
-     * Author: Công Đoàn (27/07/2022)
+     * Author: Công Đoàn
      */
     selectAllTr() {
       let index = this.paging.pageNumber;
@@ -662,7 +662,7 @@ export default {
     /**
      * Hàm thực hiện checked tất cả các ô checkox trong bảng
      * @param {number} index chỉ số của pagenumber đang được chọn
-     * Author: Công Đoàn (10/02/2022)
+     * Author: Công Đoàn
      */
     checkedAllTr(index) {
       if (!this.trSelected[index]) {
@@ -690,18 +690,20 @@ export default {
     /**
      * Hàm thực hiện hiển thị popup xóa một bản ghi
      * @param {Object} emp lớp nhân viên
-     * Author: Công Đoàn (26/07/2022)
+     * Author: Công Đoàn
      */
     isDeleteEmployee(emp) {
       this.deleteOption = deleteMode.single;
       this.stausPopup = Resource.Delete_SingleEmployee(emp.employeeCode);
       this.idDeleteEmployee = emp.employeeId;
+
+      // Hiển thị popup xóa
       this.isShowPopup = true;
     },
 
     /**
      * Hàm hiển thị popup yêu cầu xóa nhiều nhân viên
-     * Author: Công Đoàn (14/08/2022)
+     * Author: Công Đoàn
      */
     isDeleteMultiEmployee() {
       this.deleteOption = deleteMode.multi;
@@ -711,7 +713,7 @@ export default {
 
     /**
      * Hàm thực hiện xóa một bản ghi đang được chọn
-     * Author: Công Đoàn (26/07/2022)
+     * Author: Công Đoàn
      */
     async deleteSingleEmployee() {
       var me = this;
@@ -734,7 +736,7 @@ export default {
 
     /**
      * Hàm thực hiện xóa nhiều nhân viên đang được chọn
-     * Author: Công Đoàn (14/08/2022)
+     * Author: Công Đoàn
      */
     async deleteMulti() {
       try {
@@ -772,7 +774,7 @@ export default {
 
     /**
      * Hàm thực hiện đóng popup thông báo
-     * Author: Công Đoàn (26/07/2022)
+     * Author: Công Đoàn
      */
     closePopupNotification() {
       this.idDeleteEmployee = "";
@@ -781,7 +783,7 @@ export default {
 
     /**
      * Hàm set modeDetail về chế độ thêm
-     * Author: Công Đoàn (25/07/2022)
+     * Author: Công Đoàn
      */
 
     setAddMode() {
@@ -790,7 +792,7 @@ export default {
 
     /**
      * Hàm thực hiện phân trang
-     * Author: Công Đoàn (27/07/2022)
+     * Author: Công Đoàn
      */
 
     async pagingData() {
@@ -814,7 +816,7 @@ export default {
 
     /**
      * Hàm reset lại phân trang (chỉ mục, số bản ghi)
-     * Author: Công Đoàn
+     * Author: Công Đoà
      */
 
     resetPaging() {
@@ -824,7 +826,7 @@ export default {
     /**
      * Hàm thực hiện chuyển phân trang theo pageNumber
      * @param {number} data giá trị của pagenumber đang được chọn
-     * Author: Công Đoàn (27/07/2022)
+     * Author: Công Đoàn
      */
     pageSelected(data) {
       this.paging.pageNumber = data;
@@ -834,7 +836,7 @@ export default {
     /**
      * Hàm thực hiện làm rõ page đang được chọn
      * @param {number} index giá trị của pagenumber đang được chọn
-     * Author: Công Đoàn (27/07/2022)
+     * Author: Công Đoàn
      */
     checkPageSelected(index) {
       if (index == this.paging.pageNumber) {
@@ -847,7 +849,7 @@ export default {
     /**
      * Hàm thực hiện chuyển phân trang theo số bản ghi
      * @param {number} value số bản ghi trên một trang
-     * Author: Công Đoàn (27/07/2022)
+     * Author: Công Đoàn
      */
 
     pageResized(value) {
@@ -860,7 +862,7 @@ export default {
 
     /**
      * Hàm thực hiện chuyển sang trang tiếp theo
-     * Author: Công Đoàn (27/07/2022)
+     * Author: Công Đoàn
      */
 
     nextPage() {
@@ -872,7 +874,7 @@ export default {
 
     /**
      * Hàm thực hiện chuyển về trang trước đó
-     * Author: Công Đoàn (27/07/2022)
+     * Author: Công Đoàn
      */
 
     prePage() {
@@ -885,7 +887,7 @@ export default {
     /**
      * Hàm thực hiện ẩn hiện nút trước và sau
      * @param {number} data 1|2 phân biệt nút trước và sau
-     * Author: Công Đoàn (27/07/2022)
+     * Author: Công Đoàn
      */
 
     hidePreNextPage(data) {
@@ -905,7 +907,7 @@ export default {
     /**
      * Hàm thực hiện thu gọn PageIndex
      * @param {number} index giá trị pagenumber đang được chọn
-     * Author: Công Đoàn (27/07/2022)
+     * Author: Công Đoàn
      */
 
     showPageIndex(index) {
@@ -926,7 +928,7 @@ export default {
     /**
      * Hàm thực hiện đổi title PageIndex
      * @param {number} index giá trị của pagenumber đang được chọn
-     * Author: Công Đoàn (27/07/2022)
+     * Author: Công Đoàn
      */
 
     changeTitlePageIndex(index) {
@@ -946,7 +948,7 @@ export default {
 
     /**
      * Hàm thực hiện tìm kiếm và phân trang theo tìm kiếm
-     * Author: Công Đoàn (27/07/2022)
+     * Author: Công Đoàn
      */
     searchKey() {
       clearTimeout(this.timeSearchDelay);
@@ -960,7 +962,7 @@ export default {
     /**
      * Hàm thực hiện mở toast message (value: status của toast)
      * @param {string} value status của toast
-     * Author: Công Đoàn (31/07/2022)
+     * Author: Công Đoàn
      */
 
     openNewToast(value) {
@@ -970,7 +972,7 @@ export default {
     /**
      * Hàm thực hiện toast message thất bại
      * @param {string} value status của toast
-     * Author: Công Đoàn (31/02/2022)
+     * Author: Công Đoàn
      */
     openToastError(value) {
       this.$refs.toast.showErrorToast(value);
@@ -978,7 +980,7 @@ export default {
 
     /**
      * Hàm thực hiện xuất ra file excel
-     * Author: Công Đoàn (12/08/2022)
+     * Author: Công Đoàn
      */
     exportData() {
       // fetch.open( `http://localhost:5281/api/v2/Employees/Export`, "Download");
@@ -999,7 +1001,7 @@ export default {
     /**
      * Hàm thực hiên xóa mở context xóa nhiều
      * @param {boolean} value true, false điều kiện để nút xóa nhiều
-     * Author: Công Đoàn (14/08/2022)
+     * Author: Công Đoàn
      */
     openMultiDelete(value) {
       if (this.trSelected[this.paging.pageNumber].length < 1) {

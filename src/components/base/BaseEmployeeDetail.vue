@@ -3,7 +3,7 @@
     <!-- Dialog Start -->
 
     <div class="dialog" id="dlgEmployeeDetail" @keydown="keyMonitor">
-        <div class="employee__detail popup popup--add">
+        <div class="employee__detail shadow-normal popup popup--add">
 
             <!-- Header Dialog Employee -->
             <div class="popup__header">
@@ -370,7 +370,7 @@ export default {
 
         /**
          * Hàm theo dõi sự thay đổi của EmployeeId được chọn và thực hiện nếu đang ở edit
-         * Author: Công Đoàn (20/07/2022)
+         * Author: Công Đoàn 
          */
         employeeSelectedId: function(value){
             if(this.modeDetail == selectedMode.edit){
@@ -384,7 +384,7 @@ export default {
 
         /**
          * Hàm theo dõi sự thay đổi của mode được chọn và tạo mới code nếu đang ở add
-         * Author: Công Đoàn (20/07/2022)
+         * Author: Công Đoàn 
          */
         modeDetail: function(value){
             var me = this;
@@ -421,7 +421,7 @@ export default {
         /**
          * Hàm theo lấy ra data được chọn trong combobox
          * @param {object} data lưu danh department
-         * Author: Công Đoàn (22/07/2022)
+         * Author: Công Đoàn 
          */
         selectedItemCombobox(data){
             this.departmentSelected = data;
@@ -431,7 +431,7 @@ export default {
         /**
          * Hàm thực hiện chọn gender 
          * @param {number} value giá trị phân biệt giới tính
-         * Author: Công Đoàn (29/07/2022)
+         * Author: Công Đoàn 
          */
         setEmployeeGender(value){
             this.employee.Gender = value;
@@ -439,7 +439,7 @@ export default {
 
         /**
          * Hàm thực hiện reset lại combobox
-         * Author: Công Đoàn (29/07/2022)
+         * Author: Công Đoàn 
          */
         resetCombobox(){
             this.employee.departmentId = "";
@@ -447,7 +447,7 @@ export default {
 
         /**
          * Hàm thực hiện đóng dialog này
-         * Author: Công Đoàn (22/07/2022)
+         * Author: Công Đoàn 
          */
         closeThis(){
             this.$emit('close-employeedetail');
@@ -456,7 +456,7 @@ export default {
         /**
          * Hàm thực hiện Lưu hoặc thêm mới nhân viên khi theo chế độ add hoặc edit
          * @param {number} mode biến xác định chế độ lưu
-         * Author: Công Đoàn (22/07/2022)
+         * Author: Công Đoàn 
          */
         btnSaveEmployee(mode){
             try{
@@ -543,7 +543,7 @@ export default {
         /**
          * Hàm thực hiện checked radio Gender khi người dùng chọn sửa
          * @param {number} value biến phân biệt giới tính
-         * Author: Công Đoàn (25/07/2022)
+         * Author: Công Đoàn 
          */
         checkBindGender(value){
             if(value == typeGender.male){
@@ -558,7 +558,7 @@ export default {
         /**
          * Hàm thực hiện đổi dữ liệu trong employee.Gender (giới tính) khi người dùng chọn radio box 
          *  @param {number} value biến phân biệt giới tính
-         * Author: Công Đoàn (25/07/2022)
+         * Author: Công Đoàn 
          */
         checkGender(value){
             this.employee.Gender = value;
@@ -566,7 +566,7 @@ export default {
 
         /**
          * Hàm thực hiện reset lại form
-         * Author: Công Đoàn (25/07/2022)
+         * Author: Công Đoàn 
          */
         resetDetail(){
             this.employee = {};
@@ -575,7 +575,7 @@ export default {
         /**
          * Hàm thực hiện dóng dialog chi tiết nhân viên
          * @param {boolean} isShowDialog biến xác định đóng mở dialog
-         * Author: Công Đoàn (25/07/2022)
+         * Author: Công Đoàn 
          */
         closeThisDialog(isShowDialog){
             this.resetDetail();
@@ -584,7 +584,7 @@ export default {
 
         /**
          * Hàm gọi API lấy ra mã nhân viên mới
-         * Author: Công Đoàn (25/07/2022)
+         * Author: Công Đoàn 
          */
         async getNewEmployee(){
             var me = this;
@@ -610,7 +610,7 @@ export default {
         /**
          * Hàm thực hiện binding dữ liệu lên form khi chọn edit từ bảng
          * @param {string} empId biến lưu id của nhân viên 
-         * Author: Công Đoàn (25/07/2022)
+         * Author: Công Đoàn 
          */
         async setEditEmployee(empId){
             var me = this;
@@ -641,7 +641,7 @@ export default {
         /**
          * Hàm thực hiện nhân bản employee được chọn
          * @param {string} empId biến lưu id của nhân viên 
-         * Author: Công Đoàn (15/08/2022)
+         * Author: Công Đoàn 
          */
         cloneEmployee(empId){
             this.setEditEmployee(empId);
@@ -650,7 +650,7 @@ export default {
 
         /**
          * Hàm thực hiện reset object + status popup thông báo được các tham số về mặc định
-         * Author: Công Đoàn (25/07/2022)
+         * Author: Công Đoàn 
          */
         resetPopupNotification(){
             this.typePopup.danger = false;
@@ -663,7 +663,7 @@ export default {
 
         /**
          * Hàm thực hiện đóng popup thông báo
-         * Author: Công Đoàn(25/07/2022)
+         * Author: Công Đoàn(
          */
         closePopupNotification(){
             this.resetPopupNotification()
@@ -674,7 +674,7 @@ export default {
         /**
          * Hàm thực hiện validate kiểm tra ô input trống khi blur
          * @param {string} value text trong thẻ input
-         * Author: Công Đoàn (25/07/2022)
+         * Author: Công Đoàn 
          */
         validateBlurInput(value){
             if(!value){
@@ -688,7 +688,7 @@ export default {
 
         /**
          * Hàm validate tất cả sau khi thực hiện Lưu
-         * Author: Công Đoàn (25/07/2022)
+         * Author: Công Đoàn 
          */
 
         validateAllInput(){
@@ -768,7 +768,7 @@ export default {
          * Hàm show popup cảnh báo
          * @param {string} ref refs của ô bị lỗi 
          * @param {string} status thông báo lỗi
-         * Author: Công Đoàn (28/07/2022)
+         * Author: Công Đoàn 
          */
         showPopupDanger(ref,status){
             this.focusEnd = ref;
@@ -781,7 +781,7 @@ export default {
 
         /**
          * Hàm show popup hỏi
-         * Author: Công Đoàn (28/07/2022)
+         * Author: Công Đoàn 
          */
         showPopupQuestion(status){
             this.isValidateClose = false;
@@ -795,7 +795,7 @@ export default {
 
         /**
          * Hàm thực hiện kiểm tra có tồn tại dữ liệu khi thực hiện event đóng form
-         * Author: Công Đoàn (25/07/2022)
+         * Author: Công Đoàn 
          */
 
         validateCloseDialog(){
@@ -817,12 +817,12 @@ export default {
             if(this.isValidateClose == true){
                 this.closeThisDialog(true);
             }
-        },
+        },    
 
 
         /**
          * Hàm thực hiện vòng lặp focus
-         * Author: Công Đoàn (02/08/2022)
+         * Author: Công Đoàn 
          */
         reFocus(){
             this.$nextTick(() => {
@@ -833,7 +833,7 @@ export default {
 
         /**
          * Thực hiện ngược vòng lặp focus
-         * Author: Công Đoàn (02/08/2022)
+         * Author: Công Đoàn 
          */
         preFocus(e){
             if(e.shiftKey){
@@ -843,7 +843,7 @@ export default {
 
         /**
          * Mô tả: Sự kiện thay đổi khi chọn ngày sinh
-         * Author: Công Đoàn (25/07/2022)
+         * Author: Công Đoàn 
          */
 
         onDateBoxChanged(e){
@@ -853,7 +853,7 @@ export default {
         /**
          * Hàm thực hiện validateEmail
          * @param {string} email Email của employee
-         * Author: Công Đoàn (30/07/2022)
+         * Author: Công Đoàn 
          */
 
         validateEmail(email) {
@@ -869,7 +869,7 @@ export default {
 
         /**
          * Hàm thực hiện validate email khi blur
-         * Author: Công Đoàn (14/08/2022)
+         * Author: Công Đoàn 
          */
         validateEmailBlur(){
             this.isEmptyInput.employeeEmail = this.validateEmail(this.employee.email);
@@ -879,7 +879,7 @@ export default {
          * Hàm thực hiện validate date
          * @param {date} date biến lưu giá trị ngày tháng của employee
          * @returns Giá trị đúng sai khi validate ngày đúng định dạng
-         * Author: Công Đoàn (14/08/2022)
+         * Author: Công Đoàn 
          */
 
         checkDate(date){
@@ -898,7 +898,7 @@ export default {
 
         /**
          * Hàm thực hiện các sự kiện của form
-         * Author: Công Đoàn (18/08/2022)
+         * Author: Công Đoàn 
          */
         keyMonitor(e){
             if(e.key === "Escape"){

@@ -190,7 +190,7 @@ export default {
     methods: {
         /**
          * Hàm thực hiện hiển thị data của combobox 
-         * Author: Công Đoàn (27/07/2022)
+         * Author: Công Đoàn
          */
 
         showData(){
@@ -203,7 +203,7 @@ export default {
          * Hàm thực hiện chọn data trong combobox
          * @param {object} data data đang được chọn của array
          * @param {number} index chỉ số của data đang được chọn trong mảng
-         * Author: Công Đoàn (27/07/2022)
+         * Author: Công Đoàn
          */
         selectedData(data,index){
             if(data){
@@ -223,7 +223,7 @@ export default {
          * Hàm thực hiện chọn data khi đưa con trỏ chuột qua
          * @param {object} data data đang được chọn của array
          * @param {number} index chỉ số của data đang được chọn trong mảng
-         * Author: Công Đoàn (27/07/2022)
+         * Author: Công Đoàn
          */
 
         selectingData(data,index){
@@ -234,7 +234,7 @@ export default {
 
         /**
          * Hàm thực hiện autocomplete filter cho combobox
-         * Author: Công Đoàn (27/07/2022)
+         * Author: Công Đoàn
          */
         filterInputChange(){
             var me = this;
@@ -255,7 +255,7 @@ export default {
 
         /**
          * Hàm thực hiện reset filter
-         * Author: Công Đoàn (27/07/2022)
+         * Author: Công Đoàn
          */
 
         resetFilter(){
@@ -267,7 +267,7 @@ export default {
 
         /**
          * Hàm thực hiện xóa tham số data đang được selecting và đưa data về giá trị đang được selected
-         * Author: Công Đoàn (27/07/2022)
+         * Author: Công Đoàn
          */
 
         exitSelectingData(){
@@ -279,7 +279,7 @@ export default {
         /**
          * Hàm dánh dấu combobox data đang được chọn
          * @param {object} key object đang được chọn của array
-         * Author: Công Đoàn (27/07/2022)
+         * Author: Công Đoàn
          * 
          */
 
@@ -294,7 +294,7 @@ export default {
         /**
          * Hàm xác định data selecting qua event mouse
          * @param {number} index chỉ số của data đang được chọn trong mảng
-         * Author: Công Đoàn (27/07/2022)
+         * Author: Công Đoàn
          */
 
         checkIndexSelecting(index){
@@ -308,7 +308,7 @@ export default {
 
         /**
          * Hàm thực hiện xác định data selecting qua event keydown và chọn data selected qua event enter
-         * Author: Công Đoàn (27/07/2022)
+         * Author: Công Đoàn
          */
         keyMonitor(e){
             if(e.key === "ArrowDown"){
@@ -347,7 +347,7 @@ export default {
 
         /**
          * Hàm thực hiện focus input
-         * Author: Công Đoàn (27/07/2022)
+         * Author: Công Đoàn
          */
         setFocus(){
             this.$refs.focus.focus();
@@ -355,7 +355,7 @@ export default {
 
         /**
          * Hàm thực hiện vaidate rỗng 
-         * Author: Công Đoàn (29/07/2022)
+         * Author: Công Đoàn
          */
 
         validateBlur(){

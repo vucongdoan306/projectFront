@@ -68,7 +68,7 @@ export default {
     methods: {
         /**
          * Hàm thực hiện checked radio
-         * Author: Công Đoàn (01/08/2022)
+         * Author: Công Đoàn
          */
         checkedItem(item){
             this.isChecked = item;
@@ -77,7 +77,7 @@ export default {
 
         /**
          * Hàm thực hiện xác định ô được check
-         * Author: Công Đoàn (02/08/2022)
+         * Author: Công Đoàn
          */
         isCheckedItem(item){
             if(this.isChecked == item){

@@ -32,7 +32,7 @@
       <box-icon classIcon="icon__ring"></box-icon>
       <div class="header__account">
         <box-icon classIcon="icon__avatar"></box-icon>
-        <p class="fnt--14px">Nguyễn Văn Mạnh</p>
+        <p class="fnt--14px">QLNS</p>
         <div
           class="icon icon__arrow--down5 mgl--8 pointer"
           @click="openMenuFeature()"
@@ -75,7 +75,7 @@ export default {
   methods: {
     /**
      * Hàm thực hiện đóng mở Nav
-     * Author: Công Đoàn (15/07/2022)
+     * Author: Công Đoàn
      */
     closeNav(isClose) {
       this.$emit("is-closenav", isClose);

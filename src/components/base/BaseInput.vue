@@ -137,7 +137,7 @@ export default {
     methods: {
         /**
          * Hàm thực hiện binding 2 chiều update lại data trong input và kiểm tra số lượng kí tự cho phép
-         * Author: Công Đoàn (25/07/2022)
+         * Author: Công Đoàn
          */
         updateInput(event) {
             if(event.target.value.length == 1 && this.isUppercaseFirst){
@@ -154,7 +154,7 @@ export default {
 
         /**
          * Hàm kiểm tra input rỗng
-         * Author: Công Đoàn (25/07/2022)
+         * Author: Công Đoàn
          */
         checkEmpty(){ 
             this.$emit('check-empty');
@@ -162,7 +162,7 @@ export default {
 
         /**
          * Hàm focus vào ô input
-         * Author: Công Đoàn (25/07/2022)
+         * Author: Công Đoàn
          */
         setFocus(){
             this.$refs.focus.focus();

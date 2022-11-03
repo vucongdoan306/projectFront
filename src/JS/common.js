@@ -14,7 +14,7 @@ export class Common {
 
     /**
      * Hàm thực hiện format Date
-     * Author: Công Đoàn (22/07/2022)
+     * Author: Công Đoàn
      */
     static formatDate(date){
         if (date != null) {
@@ -48,7 +48,7 @@ export class Common {
 
     /**
      * Hàm kiểm tra ngày nhập lớn hơn ngày hiện tại
-     * Author: Công Đoàn (02/08/2022)
+     * Author: Công Đoàn
      */
 
     static validateDate(date){
@@ -67,7 +67,7 @@ export class Common {
 
     /**
      * Hàm thực hiện format Gender
-     * Author: Công Đoàn (22/07/2022)
+     * Author: Công Đoàn
      */
     static formatGender(val){
         if(val == gender.genderMale){

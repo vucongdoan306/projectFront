@@ -1,5 +1,5 @@
 <template>
-    <div class="navigation__left" :style="{width: isCloseNav ? '52px': '178px'}">
+    <div class="navigation__left shadow-right" :style="{width: isCloseNav ? '52px': '178px'}">
         <div class="navigation__header">
             <div class="brn--5" :class="{'navigation__icon':isCloseNav}">
                 <div class="icon" :class="{'icon__toggle--header': isCloseNav, 'dp--none': !isCloseNav}" @click="openNav(isCloseNav)"></div>
@@ -43,6 +43,8 @@ export default {
     methods: {
         /**
          * Hàm thực hiện mở nav
+         * @param {boolean} val biến điều kiện thu gọn navigation
+         * Author: Công Đoàn
          * @param {boolean} val biến điều kiện thu gọn Nav
          * Author: Khải Bùi (01/11/2022)
          */
