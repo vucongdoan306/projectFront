@@ -5,6 +5,9 @@
 </template>
 
 <script>
+    /**
+     * Bùi Văn Kiên
+     */
 export default {
     
 }

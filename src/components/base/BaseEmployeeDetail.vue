@@ -456,7 +456,7 @@ export default {
         /**
          * Hàm thực hiện Lưu hoặc thêm mới nhân viên khi theo chế độ add hoặc edit
          * @param {number} mode biến xác định chế độ lưu
-         * Author: Công Đoàn 
+         * Author: Bùi Văn Kiên
          */
         btnSaveEmployee(mode){
             try{

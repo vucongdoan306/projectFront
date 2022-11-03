@@ -27,6 +27,7 @@ export default {
     props:{
         /**
          * Loại dropdown 
+         * Bùi Văn Kiên
          */
         dropdown:{
             type: String,
@@ -35,6 +36,7 @@ export default {
         },
         /**
          * Load data trong dropdown
+         * Bùi Văn Kiên
          */
         valueDropdown:{
             type: [String,Number,Array,Object],
@@ -42,6 +44,7 @@ export default {
 
         /**
          * Nội dung trong dropdown
+         * Bùi Văn Kiên
          */
         textDropdown:{
             type: String,
@@ -49,6 +52,7 @@ export default {
 
         /**
          * Icon của Dropdown
+         * Bùi Văn Kiên
          */
         iconDropdown:{
             type: String,
@@ -56,6 +60,7 @@ export default {
 
         /**
          * Class của dropdowm
+         * Bùi Văn Kiên
          */
         classDropdown:{
             type: String,
@@ -63,6 +68,7 @@ export default {
 
         /**
          * Kiểu dropdown
+         * Bùi Văn Kiên
          */
         typeDropdown:{
             type: String,
@@ -70,6 +76,7 @@ export default {
 
         /**
          * Size icon Dropdown
+         * Bùi Văn Kiên
          */
         sizeIconDropdown:{
             type: String,
@@ -77,6 +84,7 @@ export default {
 
         /**
          * Dropdown data đang được chọn
+         * Bùi Văn Kiên
          */
         selectedDropdown: {
             type: [String,Number]
@@ -98,7 +106,7 @@ export default {
         /**
          * Hàm thực hiện đóng mở dropdown data
          * @param {boolean} isShow biến xác định đóng mở dropdown
-         * Author: Công Đoàn 
+         * Bùi Văn Kiên
          */
         isShowData(isShow){
             this.Open = isShow;
@@ -107,7 +115,7 @@ export default {
         /**
          * Hàm đánh dâu item data được chọn
          * @param {string, number, object} value lưu giá trị đang được chọn trong dropdown
-         * Author: Công Đoàn 
+         * Bùi Văn Kiên
          */
         checkClick(value){
             if(value==this.selectedDropdown){
@@ -118,7 +126,7 @@ export default {
 
         /**
          * Hàm chuyển data được chọn lên phân trang
-         * Author: Công Đoàn 
+         * Bùi Văn Kiên
          */
         isSelectedData(value){
             this.$emit('select-data',value);
