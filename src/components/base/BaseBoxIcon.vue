@@ -10,7 +10,7 @@
 export default {
     props: {
         /**
-         * prop chứa clas icon
+         * prop chứa class icon
          */
         classIcon: {
             type: String,

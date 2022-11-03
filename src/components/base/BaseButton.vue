@@ -76,7 +76,7 @@ export default {
     methods: {
         /**
          * Hàm thực hiện đặt focus lại vào button
-         * Author: Công Đoàn 
+         * Author: Khải Bùi
          */
         setFocus(){
             this.$refs.button.focus();
