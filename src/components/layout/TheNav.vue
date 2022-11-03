@@ -30,7 +30,7 @@ export default {
     },
     props: {
         /**
-         * Biến xác định đóng mở navigation
+         * Biến xác định đóng mở Nav
          */
         isCloseNav: {
             type: Boolean,
@@ -43,8 +43,8 @@ export default {
     methods: {
         /**
          * Hàm thực hiện mở nav
-         * @param {boolean} val biến điều kiện thu gọn navigation
-         * Author: Công Đoàn (15/07/2022)
+         * @param {boolean} val biến điều kiện thu gọn Nav
+         * Author: Khải Bùi (01/11/2022)
          */
         openNav(val){
             this.$emit('is-opennav',val);
