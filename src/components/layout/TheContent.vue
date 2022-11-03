@@ -10,7 +10,7 @@ export default{
         /**
          * Prop thực hiện đóng mở nav
          */
-        isCloseNav: {
+        isCloseNav: { 
             type: Boolean,
             required: true,
         }

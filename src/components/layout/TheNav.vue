@@ -43,8 +43,6 @@ export default {
     methods: {
         /**
          * Hàm thực hiện mở nav
-         * @param {boolean} val biến điều kiện thu gọn navigation
-         * Author: Công Đoàn
          * @param {boolean} val biến điều kiện thu gọn Nav
          * Author: Khải Bùi (01/11/2022)
          */
