@@ -696,6 +696,8 @@ export default {
       this.deleteOption = deleteMode.single;
       this.stausPopup = Resource.Delete_SingleEmployee(emp.employeeCode);
       this.idDeleteEmployee = emp.employeeId;
+
+      // Hiển thị popup xóa
       this.isShowPopup = true;
     },
 

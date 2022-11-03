@@ -3,7 +3,7 @@
     <!-- Dialog Start -->
 
     <div class="dialog" id="dlgEmployeeDetail" @keydown="keyMonitor">
-        <div class="employee__detail popup popup--add">
+        <div class="employee__detail shadow-normal popup popup--add">
 
             <!-- Header Dialog Employee -->
             <div class="popup__header">
