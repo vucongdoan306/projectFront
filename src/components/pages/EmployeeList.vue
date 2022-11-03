@@ -440,7 +440,7 @@ export default {
 
     /**
      * Hàm thực hiện đóng mở context menu
-     * Author: Công Đoàn (22/07/2022)
+     * Author: Vũ Công Đoàn (22/07/2022)
      */
     toggleFeature(data) {
       if (this.contextMenuSelected == data) {
