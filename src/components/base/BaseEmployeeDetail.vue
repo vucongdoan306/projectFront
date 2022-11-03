@@ -817,7 +817,7 @@ export default {
             if(this.isValidateClose == true){
                 this.closeThisDialog(true);
             }
-        },
+        },    
 
 
         /**
