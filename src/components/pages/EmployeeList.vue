@@ -436,7 +436,7 @@ export default {
         this.pagingData();
         this.openEmployeeAdd();
       }, 200);
-    },
+    }, 
 
     /**
      * Hàm thực hiện đóng mở context menu
